@@ -1,5 +1,11 @@
 .container-produtos {
   min-height: 100vh;
+  position: relative;
+}
+
+.ilustracao2 {
+  position: absolute;
+  z-index: 2;
 }
 
 .header-produtos {
@@ -13,6 +19,7 @@
   position: relative;
   justify-content: space-around;
   padding-top: 147px;
+  align-items: center;
 }
 
 .logo {
@@ -23,6 +30,7 @@
   top: 157px;
   left: 112px;
   border: 6px solid #FFFFFF;
+  z-index: 3;
 }
 
 .header-produtos h1 {
@@ -50,4 +58,5 @@
   text-align: center;
   color: #525459;
   line-height: 170%;
+  margin-bottom: 32px;
 }

@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Login from "./paginas/Login";
 import { AuthContextProvider } from "./contexto/AuthContext";

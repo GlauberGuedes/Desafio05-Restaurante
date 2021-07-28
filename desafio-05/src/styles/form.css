@@ -1,0 +1,63 @@
+.container-form {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 900px;
+    width: 40%;
+    border-radius: 0px 0px 200px 0px;
+    padding: 4rem 0 0 7rem;
+    background-color: white;
+}
+
+.form {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #393C40;
+}
+
+h1 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: 32px;
+    color: #D13201;
+    padding-bottom: 1.6rem;
+}
+
+label {
+    padding: 0 0 0.5rem 0.5rem;
+}
+
+input, select, textarea {
+    margin-bottom: 3.2rem;
+    border: 0.5px solid #BEBEBE;
+    border-radius: 0.5rem;
+}
+
+input {
+    height: 2rem;
+    width: 22rem;
+}
+
+button {
+    position: relative;
+    bottom: 16rem;
+    left: 13rem;
+}
+
+.links {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #6F7377;
+    position: relative;
+    bottom: 13rem;
+    left: 14rem;
+}
+
+.links span {
+    padding-right: 0.5rem;
+}
+
+
+

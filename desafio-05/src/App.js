@@ -1,13 +1,11 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import './styles/global.css';
+import FormularioCadastro from './pages/cadastro/FormularioCadastro';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact />
-      </Switch>
-    </Router>
+    <div className="App">
+      <FormularioCadastro />
+    </div>
   );
 }
 

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import Login from "./paginas/Login";
 import { AuthContextProvider } from "./contexto/AuthContext";
 import useAuth from "./hooks/useAuth";
+import Produtos from "./paginas/Produtos";
 
 function RotasProtegidas(props) {
   const { token } = useAuth();
@@ -18,7 +19,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login} />
           <RotasProtegidas>
-
+            <Route path="/produtos" component={Produtos}/>
           </RotasProtegidas>
         </Switch>
       </Router>

@@ -49,9 +49,10 @@
 .conteudo-pagina {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: 202px 110px 57px 110px;
   align-items: center;
   min-height: calc(100vh - 245px);
+  position: relative;
 }
 
 .conteudo-pagina p {
@@ -59,4 +60,27 @@
   color: #525459;
   line-height: 170%;
   margin-bottom: 32px;
+}
+
+.botao-modal {
+  position: absolute;
+  top: 56px;
+  right: 300px;
+  z-index: 3;
+}
+
+.container-cards {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1380px) {
+  .conteudo-pagina {
+    padding: 180px 65px 57px 65px;
+  }
+
+  .container-cards {
+    gap: 20px;
+  }
 }

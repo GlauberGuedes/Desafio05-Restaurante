@@ -1,6 +1,6 @@
 import "./style.css";
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { post } from "../../servicos/requisicaoAPI";
 import ilustracao from "../../assets/illustration.svg";
@@ -15,8 +15,14 @@ export default function Login() {
   const history = useHistory();
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const { setToken } = useAuth();
+  const { setToken, token } = useAuth();
   const [visivel, setVisivel] = useState(false);
+
+  useEffect(() => {
+    if(token) {
+      history.push("/produtos");
+    }
+  }, [])
 
   async function onSubmit(data) {
     setErro("");

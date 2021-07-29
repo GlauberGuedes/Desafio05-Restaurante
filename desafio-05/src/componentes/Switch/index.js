@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+
 
 
 const IOSSwitch = withStyles((theme) => ({
@@ -60,17 +61,16 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-export default function Switches({ texto, ativo, setAtivo }) {
-  
+export default function Switches({ texto, setAtivo, ativo }) {
 
   const handleChange = (event) => {
-    setAtivo((ativo)=> !ativo);
+    setAtivo((ativo) => !ativo);
   };
 
   return (
     <FormGroup>
       <FormControlLabel
-        control={<IOSSwitch checked={ativo} onChange={handleChange} name="checkedB" />}
+        control={<IOSSwitch checked={ativo} onChange={handleChange} />}
         label={texto}
       />
     </FormGroup>

@@ -1,31 +1,92 @@
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Switches from "../Switch";
 import PublishIcon from "@material-ui/icons/Publish";
 import imagemVazia from "../../assets/imagem-vazia.svg";
+import Carregando from "../../componentes/Carregando";
+import AlertaDeErro from "../../componentes/AlertaDeErro";
 
-export default function Modal({ textoBotao, textoBotaoSubmit }) {
+export default function Modal({
+  textoBotao,
+  textoBotaoSubmit,
+  requisicaoProduto,
+  classeBotao,
+  nomeModal,
+  produtoAtivado,
+  observacoesAtivada,
+}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [produtoAtivo, setProdutoAtivo] = useState(true);
-  const [observacaoAtiva, setObservacaoAtiva] = useState(true);
+  const [produtoAtivo, setProdutoAtivo] = useState();
+  const [permiteObservacoes, setPermiteObservacoes] = useState();
+  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [preco, setPreco] = useState("");
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
   function abrirModal() {
     setOpen(true);
   }
 
+  useEffect(() => {
+    setErro("");
+    setNome("");
+    setDescricao("");
+    setPreco("");
+    setProdutoAtivo(produtoAtivado === undefined ? true : produtoAtivado);
+    setPermiteObservacoes(observacoesAtivada === undefined ? true : observacoesAtivada);
+  }, [])
+
   function fecharModal() {
     setOpen(false);
+    
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+
+    setErro("");
+
+    const dados = {
+      nome: nome || undefined,
+      descricao: descricao || undefined,
+      preco: preco || undefined,
+      ativo: produtoAtivo,
+      permiteObservacoes,
+    };
+    
+    try {
+      setCarregando(true);
+
+      const { erro } = await requisicaoProduto(dados);
+
+      setCarregando(false);
+
+      if (erro) {
+        return setErro(erro);
+      }
+
+      fecharModal();
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
   }
 
   return (
     <div className={classes.container}>
-      <button className="buttonLG" type="button" onClick={abrirModal}>{textoBotao}</button>
+      <button
+        className={"button " + classeBotao}
+        type="button"
+        onClick={abrirModal}
+      >
+        {textoBotao}
+      </button>
       <Dialog
         open={open}
         onClose={fecharModal}
@@ -33,9 +94,9 @@ export default function Modal({ textoBotao, textoBotaoSubmit }) {
         maxWidth={false}
         scroll="body"
       >
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <Typography variant="h1" className={classes.titulo}>
-            Novo produto
+            {nomeModal}
           </Typography>
           <DialogContent className={classes.conteudoForm}>
             <div className={classes.listaInputs}>
@@ -43,13 +104,25 @@ export default function Modal({ textoBotao, textoBotaoSubmit }) {
                 <label className={classes.label} htmlFor="nome">
                   Nome
                 </label>
-                <input className={classes.input} type="text" id="nome" />
+                <input
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  className={classes.input}
+                  type="text"
+                  id="nome"
+                />
               </div>
               <div className={classes.divInput}>
                 <label className={classes.label} htmlFor="descricao">
                   Descrição
                 </label>
-                <input className={classes.input} type="text" id="descricao" />
+                <input
+                  value={descricao}
+                  onChange={(e) => setDescricao(e.target.value)}
+                  className={classes.input}
+                  type="text"
+                  id="descricao"
+                />
                 <Typography variant="subtitle2" className={classes.span}>
                   Máx: 80 caracteres
                 </Typography>
@@ -59,6 +132,8 @@ export default function Modal({ textoBotao, textoBotaoSubmit }) {
                   Valor
                 </label>
                 <input
+                  value={preco}
+                  onChange={(e) => setPreco(e.target.value)}
                   className={classes.inputNumber}
                   type="number"
                   id="valor"
@@ -71,25 +146,45 @@ export default function Modal({ textoBotao, textoBotaoSubmit }) {
               />
               <Switches
                 texto="Permitir observações"
-                ativo={observacaoAtiva}
-                setAtivo={setObservacaoAtiva}
+                setAtivo={setPermiteObservacoes}
+                ativo={permiteObservacoes}
               />
             </div>
             <div className={classes.imagem}>
-              <img src={imagemVazia} alt="imagem do produto" width="150" heigth="150"/>
+              <img
+                src={imagemVazia}
+                alt="imagem do produto"
+                width="150"
+                heigth="150"
+              />
               <label className={classes.labelImagem} htmlFor="file">
                 <PublishIcon className={classes.upload} />
                 <br />
                 Clique ou arraste <br />
                 para adicionar uma imagem
               </label>
-              <input className={classes.inputImagem} onChange={(e) => console.log(e.target.files)} type="file" id="file" />
+              <input
+                className={classes.inputImagem}
+                onChange={(e) => console.log(e.target.files)}
+                type="file"
+                id="file"
+              />
             </div>
           </DialogContent>
           <DialogActions className={classes.botoes}>
-            <button className={classes.botaoCancelar} type="button" onClick={fecharModal}>Cancelar</button>
-            <button type="submit" className="buttonLG">{textoBotaoSubmit}</button>
+            <button
+              className={classes.botaoCancelar}
+              type="button"
+              onClick={fecharModal}
+            >
+              Cancelar
+            </button>
+            <button type="submit" className={"button " + classeBotao}>
+              {textoBotaoSubmit}
+            </button>
           </DialogActions>
+          <AlertaDeErro erro={erro} />
+          <Carregando open={carregando} />
         </form>
       </Dialog>
     </div>

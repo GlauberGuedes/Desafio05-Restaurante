@@ -1,6 +1,19 @@
 .form-cadastro {
+    position: relative;
     background-image: url('../../assets/bg-cadastro.png');
     background-repeat: no-repeat;
     background-size: cover;
-    max-height: 988px;
+    max-height: 990px;
+}
+
+.form-submits {
+    margin: 0;
+    padding: 0;
+    max-height: 967px;
+}
+
+.botoes-steppers {
+    margin: 0;
+    padding: 0;
+    max-height: 965px;
 }

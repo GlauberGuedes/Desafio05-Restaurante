@@ -4,17 +4,15 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import './style.css'
 
-function SenhaInput({ label, value, setValue }) {
+function SenhaInput({ label }) {
     const [mostrarSenha, setMostrarSenha] = useState(false);
 
         return (
             <div className="flex-column input-senha">
                 <label htmlFor="senha">{label}</label>
                 <input 
-                    id="senha" 
-                    type={mostrarSenha ? "text" : "password"} 
-                    value={value} 
-                    onChange={(e) => setValue(e.target.value)} 
+                    id={{label} === "Senha" ? "senha" : "confirmar_senha"} 
+                    type={mostrarSenha ? "text" : "password"}
                 />
                 <FontAwesomeIcon 
                     icon={mostrarSenha ? faEye : faEyeSlash} 

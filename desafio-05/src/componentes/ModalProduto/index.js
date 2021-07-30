@@ -3,12 +3,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Switches from "../Switch";
 import PublishIcon from "@material-ui/icons/Publish";
 import imagemVazia from "../../assets/imagem-vazia.svg";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
+import { useHistory } from "react-router-dom";
 
 export default function Modal({
   textoBotao,
@@ -21,30 +22,33 @@ export default function Modal({
 }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [produtoAtivo, setProdutoAtivo] = useState();
-  const [permiteObservacoes, setPermiteObservacoes] = useState();
+  const [produtoAtivo, setProdutoAtivo] = useState(
+    produtoAtivado === undefined ? true : produtoAtivado
+  );
+  const [permiteObservacoes, setPermiteObservacoes] = useState(
+    observacoesAtivada === undefined ? true : observacoesAtivada
+  );
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const history = useHistory();
 
   function abrirModal() {
     setOpen(true);
   }
 
-  useEffect(() => {
+  function fecharModal() {
+    setOpen(false);
     setErro("");
     setNome("");
     setDescricao("");
     setPreco("");
     setProdutoAtivo(produtoAtivado === undefined ? true : produtoAtivado);
-    setPermiteObservacoes(observacoesAtivada === undefined ? true : observacoesAtivada);
-  }, [])
-
-  function fecharModal() {
-    setOpen(false);
-    
+    setPermiteObservacoes(
+      observacoesAtivada === undefined ? true : observacoesAtivada
+    );
   }
 
   async function onSubmit(e) {
@@ -53,13 +57,15 @@ export default function Modal({
     setErro("");
 
     const dados = {
-      nome: nome || undefined,
-      descricao: descricao || undefined,
-      preco: preco || undefined,
+      informacoes: {
+        nome: nome || undefined,
+        descricao: descricao || undefined,
+        preco: preco || undefined,
+        permiteObservacoes,
+      },
       ativo: produtoAtivo,
-      permiteObservacoes,
     };
-    
+
     try {
       setCarregando(true);
 
@@ -72,6 +78,7 @@ export default function Modal({
       }
 
       fecharModal();
+      history.push("/produtos");
     } catch (error) {
       setCarregando(false);
       setErro(error.message);

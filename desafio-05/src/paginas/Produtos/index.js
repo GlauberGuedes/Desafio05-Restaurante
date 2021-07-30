@@ -29,6 +29,7 @@ export default function Produtos() {
         return setErro(dados);
       }
 
+
       return setProdutos(dados);
 
     } catch (error) {

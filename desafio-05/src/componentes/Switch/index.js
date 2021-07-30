@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -62,7 +62,6 @@ const IOSSwitch = withStyles((theme) => ({
 });
 
 export default function Switches({ texto, setAtivo, ativo }) {
-
   const handleChange = (event) => {
     setAtivo((ativo) => !ativo);
   };

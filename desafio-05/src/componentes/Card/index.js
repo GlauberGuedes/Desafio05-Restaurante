@@ -2,7 +2,10 @@ import "./style.css";
 import pizza from "../../assets/pizza.png";
 import ModalProduto from "../../componentes/ModalProduto";
 import useAuth from "../../hooks/useAuth";
-import { putProduto } from "../../servicos/requisicaoAPI";
+import { putProduto, del, postDesativar, postAtivar } from "../../servicos/requisicaoAPI";
+import Carregando from "../../componentes/Carregando";
+import AlertaDeErro from "../../componentes/AlertaDeErro";
+import { useState } from "react";
 
 export default function Card({
   nome,
@@ -14,14 +17,31 @@ export default function Card({
   observacoesAtivada,
 }) {
   const { token } = useAuth();
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
   async function atualizarProduto(data) {
-    console.log(data);
+  
     try {
-      const { dados, erro } = await putProduto(`produtos/${id}`, data, token);
+      const { dados, erro } = await putProduto(`produtos/${id}`, data.informacoes, token);
 
       if (erro) {
         return { erro: dados };
+      }
+
+      if(data.ativo) {
+        const resposta = await postAtivar(`produtos/${id}/ativar`, token);
+
+        if(resposta.erro) {
+          return { erro: resposta.dados }
+        }
+
+      }else {
+        const resposta = await postDesativar(`produtos/${id}/desativar`, token);
+
+        if(resposta.erro) {
+          return { erro: resposta.dados }
+        }
       }
 
       await listaDeProdutos();
@@ -29,6 +49,27 @@ export default function Card({
       return { erro: false };
     } catch (error) {
       throw error;
+    }
+  }
+
+  async function excluirProduto() {
+    setErro("");
+    setCarregando(true);
+    try {
+      const { dados, erro } = await del(`produtos/${id}`, token);
+
+    setCarregando(false);
+
+      if (erro) {
+        return setErro(dados);
+      }
+
+      await listaDeProdutos();
+
+      return;
+    } catch (error) {
+      setCarregando(false);
+      return setErro(error.message);
     }
   }
 
@@ -48,7 +89,7 @@ export default function Card({
         <img src={pizza} alt="imagem do produto" />
       </div>
       <div className="botoes-card">
-        <button className="botao-excluir" type="button">
+        <button className="botao-excluir" type="button" onClick={excluirProduto}>
           Excluir produto do catálogo
         </button>
         <ModalProduto
@@ -61,6 +102,8 @@ export default function Card({
           observacoesAtivada={observacoesAtivada}
         />
       </div>
+      <AlertaDeErro erro={erro} />
+      <Carregando open={carregando} />
     </div>
   );
 }

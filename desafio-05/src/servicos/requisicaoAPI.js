@@ -95,3 +95,82 @@ export async function get(endPoint, token) {
     throw error;
   }
 }
+
+export async function del(endPoint, token) {
+  const headers = {
+    'Content-type': 'application/json'
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`; 
+  }
+
+  try{
+    const resposta = await fetch(baseURL+endPoint, {
+      method: 'DELETE',
+      headers
+    });
+
+    let dados;
+
+    if(!resposta.ok) {
+      dados = await resposta.json();
+    }
+    
+    return { dados, erro:!resposta.ok }
+  }catch(error) {
+    throw error;
+  }
+}
+
+export async function postAtivar (endPoint, token) {
+  const headers = {
+    'Content-type': 'application/json'
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`; 
+  }
+
+  try{
+    const resposta = await fetch(baseURL+endPoint, {
+      method: 'POST',
+      headers
+    });
+    
+    let dados;
+    if(!resposta.ok) {
+      dados = await resposta.json();
+    }
+    
+    return { dados, erro:!resposta.ok }
+  }catch(error) {
+    throw error;
+  }
+}
+
+export async function postDesativar (endPoint, token) {
+  const headers = {
+    'Content-type': 'application/json'
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`; 
+  }
+
+  try{
+    const resposta = await fetch(baseURL+endPoint, {
+      method: 'POST',
+      headers
+    });
+    
+    let dados;
+    if(!resposta.ok) {
+      dados = await resposta.json();
+    }
+    
+    return { dados, erro:!resposta.ok }
+  }catch(error) {
+    throw error;
+  }
+}

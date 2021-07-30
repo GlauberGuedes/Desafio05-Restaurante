@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-import '../../InputSenha/style.css';
+import './style.css';
 
 function DadosUsuario() {
     const { register } = useFormContext();
@@ -44,10 +44,11 @@ function DadosUsuario() {
                         <input 
                             id="confirmar_senha" 
                             type={mostrarSenha ? "text" : "password"}
+                            {...register("confirmar_senha")}
                         />
                         <FontAwesomeIcon 
                             icon={mostrarConfirmarSenha ? faEye : faEyeSlash} 
-                            className="visualizar-senha" 
+                            className="visualizar-confirmaSenha" 
                             size="md" 
                             onClick={() => setMostrarConfirmarSenha(!mostrarConfirmarSenha)} 
                         />

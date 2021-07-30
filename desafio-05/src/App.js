@@ -12,8 +12,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/usuarios" component={FormularioCadastro} />
-          <Route path="/login" component={Login} />
+          <Route path="/" exact component={Login} />
+          <Route path="/cadastro" component={FormularioCadastro} />
         </Switch>
       </Router>
     </div>

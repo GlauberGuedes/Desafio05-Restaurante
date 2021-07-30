@@ -1,0 +1,18 @@
+.input-senha {
+    position: relative;
+}
+
+.visualizar-senha, .visualizar-confirmaSenha {
+    position: absolute;
+    left: 20rem;
+    cursor: pointer;
+    color: #BEBEBE;
+}
+
+.visualizar-senha{
+    top: 2.5rem;
+}
+
+.visualizar-confirmaSenha {
+    top: 9.7rem;
+}

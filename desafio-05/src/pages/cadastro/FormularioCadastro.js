@@ -8,21 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import DadosUsuario from '../../componentes/steppers/usuario/DadosUsuario';
 import DadosRestaurante from '../../componentes/steppers/restaurante/DadosRestaurante';
 import DadosEntrega from '../../componentes/steppers/entrega/DadosEntrega';
-import { makeStyles } from '@material-ui/styles';
+import Login from '../../pages/login';
 
 import './style.css';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  steppers: {
-    position: 'absolute',
-    marginTop: '6rem',
-    marginLeft: '19rem',
-    zIndex: '1'
-  },
-}));
 
 function getSteps() {
   return ['', '', ''];
@@ -37,12 +25,11 @@ function getStepContent(step) {
     case 2:
       return <DadosEntrega />;
     default:
-      return 'Unknown step';
+      return <Login />
   }
 }
 
 function FormularioCadastro() {
-  const classes = useStyles();
   const methods = useForm();
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
@@ -54,13 +41,13 @@ function FormularioCadastro() {
         nome: data.nome,
         email: data.email,
         senha: data.senha,
-        retaurante: {
+        restaurante: {
           nome: data.nomeRestaurante,
           idCategoria: data.idCategoria,
           descricao: data.descricao,
-        taxaEntrega: data.taxaEntrega,
-        tempoEntregaEmMinutos: data.tempoEntregaEmMinutos,
-        valorMinimoPedido: data.valorMinimoPedido
+          taxaEntrega: data.taxaEntrega,
+          tempoEntregaEmMinutos: data.tempoEntregaEmMinutos,
+          valorMinimoPedido: data.valorMinimoPedido
         }
       }
 
@@ -79,14 +66,19 @@ function FormularioCadastro() {
 
       console.log(dataCadastro);
 
-      history.push('/login')
+      history.push('/')
     } catch (error) {
       console.log(error.message);
     }
     
   }
   
-  const handleNext = () => {
+  function handleNext(data) {
+    if(data.senha) {
+      if(data.senha !== data.confirmar_senha) {
+        return console.log(data.confirmar_senha)
+      }
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -97,7 +89,7 @@ function FormularioCadastro() {
   return (
     <FormProvider {...methods} >
       <form onSubmit={methods.handleSubmit(onSubmit)} className="form-cadastro">
-        <Stepper className={classes.steppers} activeStep={activeStep}>
+        <Stepper className="steppers" activeStep={activeStep}>
           {steps.map((label) => {
             const stepProps = {};
             const labelProps = {};
@@ -110,22 +102,20 @@ function FormularioCadastro() {
         </Stepper>
         <div className="form-submits" >
           <div className="botoes-steppers">
-            <Typography>{getStepContent(activeStep)}</Typography>
-            <div>
-              <button disabled={activeStep === 0} onClick={handleBack}>
+            <Typography className="steps">{getStepContent(activeStep)}</Typography>
+              <button className={activeStep === 0 ? "desativado" : "botao-voltar"} disabled={activeStep === 0} onClick={handleBack}>
                 Anterior
               </button>
-              <button
+              <button className="botao-ativado"
                 type={activeStep === steps.length ? 'submit' : 'button'}
-                onClick={activeStep === steps.length ? onsubmit : handleNext}
+                onClick={activeStep === steps.length ? onsubmit : methods.handleSubmit(handleNext)}
               >
                 {activeStep === steps.length - 1 ? 'Criar conta' : 'Próximo'}
               </button>
-            </div>
           </div>
           <div className="links">
             <span>Já tem uma conta?</span>
-            <a href="#">Login</a>
+            <Link className="link-login" to="/">Login</Link>
           </div>
         </div>
       </form>

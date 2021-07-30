@@ -33,7 +33,12 @@
 .informacao-card span {
   box-sizing: content-box;
   padding: 4px 15px;
-  background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;
+  background: linear-gradient(
+      0deg,
+      rgba(13, 138, 79, 0.1),
+      rgba(13, 138, 79, 0.1)
+    ),
+    #ffffff;
   border-radius: 4px;
   width: min-content;
   color: #006335;
@@ -70,7 +75,7 @@
 
 .botao-excluir {
   all: unset;
-  color: #F21B1B;
+  color: #f21b1b;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;

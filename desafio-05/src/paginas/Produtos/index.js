@@ -29,9 +29,7 @@ export default function Produtos() {
         return setErro(dados);
       }
 
-
       return setProdutos(dados);
-
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -48,8 +46,11 @@ export default function Produtos() {
   }
 
   async function cadastrarProduto(data) {
+    const { informacoes } = data;
+    const dadosProduto = {...informacoes, ativo: data.ativo};
+    
     try {
-      const { dados, erro } = await postProduto("produtos", data, token);
+      const { dados, erro } = await postProduto("produtos", dadosProduto, token);
 
       if (erro) {
         return { erro: dados };

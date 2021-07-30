@@ -19,10 +19,10 @@ export default function Login() {
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
-    if(token) {
+    if (token) {
       history.push("/produtos");
     }
-  }, [])
+  }, []);
 
   async function onSubmit(data) {
     setErro("");

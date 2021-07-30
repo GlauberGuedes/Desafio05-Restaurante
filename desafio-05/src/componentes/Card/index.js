@@ -2,7 +2,12 @@ import "./style.css";
 import pizza from "../../assets/pizza.png";
 import ModalProduto from "../../componentes/ModalProduto";
 import useAuth from "../../hooks/useAuth";
-import { putProduto, del, postDesativar, postAtivar } from "../../servicos/requisicaoAPI";
+import {
+  putProduto,
+  del,
+  postDesativar,
+  postAtivar,
+} from "../../servicos/requisicaoAPI";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
 import { useState } from "react";
@@ -21,26 +26,28 @@ export default function Card({
   const [carregando, setCarregando] = useState(false);
 
   async function atualizarProduto(data) {
-  
     try {
-      const { dados, erro } = await putProduto(`produtos/${id}`, data.informacoes, token);
+      const { dados, erro } = await putProduto(
+        `produtos/${id}`,
+        data.informacoes,
+        token
+      );
 
       if (erro) {
         return { erro: dados };
       }
 
-      if(data.ativo) {
+      if (data.ativo) {
         const resposta = await postAtivar(`produtos/${id}/ativar`, token);
 
-        if(resposta.erro) {
-          return { erro: resposta.dados }
+        if (resposta.erro) {
+          return { erro: resposta.dados };
         }
-
-      }else {
+      } else {
         const resposta = await postDesativar(`produtos/${id}/desativar`, token);
 
-        if(resposta.erro) {
-          return { erro: resposta.dados }
+        if (resposta.erro) {
+          return { erro: resposta.dados };
         }
       }
 
@@ -58,7 +65,7 @@ export default function Card({
     try {
       const { dados, erro } = await del(`produtos/${id}`, token);
 
-    setCarregando(false);
+      setCarregando(false);
 
       if (erro) {
         return setErro(dados);
@@ -89,7 +96,11 @@ export default function Card({
         <img src={pizza} alt="imagem do produto" />
       </div>
       <div className="botoes-card">
-        <button className="botao-excluir" type="button" onClick={excluirProduto}>
+        <button
+          className="botao-excluir"
+          type="button"
+          onClick={excluirProduto}
+        >
           Excluir produto do catálogo
         </button>
         <ModalProduto
@@ -100,6 +111,7 @@ export default function Card({
           requisicaoProduto={atualizarProduto}
           produtoAtivado={produtoAtivado}
           observacoesAtivada={observacoesAtivada}
+          imagem={pizza}
         />
       </div>
       <AlertaDeErro erro={erro} />

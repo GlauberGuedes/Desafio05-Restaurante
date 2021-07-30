@@ -1,10 +1,8 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-
-
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -12,22 +10,22 @@ const IOSSwitch = withStyles((theme) => ({
     height: 26,
     padding: 0,
     margin: theme.spacing(1),
-    marginLeft: 15
+    marginLeft: 15,
   },
   switchBase: {
     padding: 1,
-    '&$checked': {
-      transform: 'translateX(16px)',
+    "&$checked": {
+      transform: "translateX(16px)",
       color: "green",
-      '& + $track': {
-        backgroundColor: '#52d86990',
+      "& + $track": {
+        backgroundColor: "#52d86990",
         opacity: 1,
-        border: '2px solid green',
+        border: "2px solid green",
       },
     },
-    '&$focusVisible $thumb': {
-      color: '#52d869',
-      border: '6px solid #fff',
+    "&$focusVisible $thumb": {
+      color: "#52d869",
+      border: "6px solid #fff",
     },
   },
   thumb: {
@@ -40,7 +38,7 @@ const IOSSwitch = withStyles((theme) => ({
     border: `1px solid ${theme.palette.grey[400]}`,
     backgroundColor: theme.palette.grey[50],
     opacity: 1,
-    transition: theme.transitions.create(['background-color', 'border']),
+    transition: theme.transitions.create(["background-color", "border"]),
   },
   checked: {},
   focusVisible: {},

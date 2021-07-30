@@ -5,11 +5,9 @@ import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
 import { useState } from "react";
 import Switches from "../Switch";
-import PublishIcon from "@material-ui/icons/Publish";
-import imagemVazia from "../../assets/imagem-vazia.svg";
-import Carregando from "../../componentes/Carregando";
-import AlertaDeErro from "../../componentes/AlertaDeErro";
-import { useHistory } from "react-router-dom";
+import Carregando from "../Carregando";
+import AlertaDeErro from "../AlertaDeErro";
+import InputImagem from "../InputImagem";
 
 export default function Modal({
   textoBotao,
@@ -19,6 +17,7 @@ export default function Modal({
   nomeModal,
   produtoAtivado,
   observacoesAtivada,
+  imagem,
 }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -33,7 +32,13 @@ export default function Modal({
   const [preco, setPreco] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const history = useHistory();
+
+  function resetarInput() {
+    setErro("");
+    setNome("");
+    setDescricao("");
+    setPreco("");
+  }
 
   function abrirModal() {
     setOpen(true);
@@ -41,10 +46,7 @@ export default function Modal({
 
   function fecharModal() {
     setOpen(false);
-    setErro("");
-    setNome("");
-    setDescricao("");
-    setPreco("");
+    resetarInput();
     setProdutoAtivo(produtoAtivado === undefined ? true : produtoAtivado);
     setPermiteObservacoes(
       observacoesAtivada === undefined ? true : observacoesAtivada
@@ -53,8 +55,8 @@ export default function Modal({
 
   async function onSubmit(e) {
     e.preventDefault();
-
     setErro("");
+    setCarregando(true);
 
     const dados = {
       informacoes: {
@@ -67,8 +69,6 @@ export default function Modal({
     };
 
     try {
-      setCarregando(true);
-
       const { erro } = await requisicaoProduto(dados);
 
       setCarregando(false);
@@ -77,8 +77,8 @@ export default function Modal({
         return setErro(erro);
       }
 
-      fecharModal();
-      history.push("/produtos");
+      setOpen(false);
+      resetarInput();
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -157,26 +157,7 @@ export default function Modal({
                 ativo={permiteObservacoes}
               />
             </div>
-            <div className={classes.imagem}>
-              <img
-                src={imagemVazia}
-                alt="imagem do produto"
-                width="150"
-                heigth="150"
-              />
-              <label className={classes.labelImagem} htmlFor="file">
-                <PublishIcon className={classes.upload} />
-                <br />
-                Clique ou arraste <br />
-                para adicionar uma imagem
-              </label>
-              <input
-                className={classes.inputImagem}
-                onChange={(e) => console.log(e.target.files)}
-                type="file"
-                id="file"
-              />
-            </div>
+            <InputImagem imagem={imagem} />
           </DialogContent>
           <DialogActions className={classes.botoes}>
             <button

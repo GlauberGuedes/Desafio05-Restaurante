@@ -1,13 +1,22 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import './styles/global.css';
+import { 
+        BrowserRouter as Router, 
+        Route, 
+        Switch 
+      } from 'react-router-dom'
+import FormularioCadastro from './pages/cadastro/FormularioCadastro';
+import Login from './pages/login';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact />
-      </Switch>
-    </Router>
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/cadastro" component={FormularioCadastro} />
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

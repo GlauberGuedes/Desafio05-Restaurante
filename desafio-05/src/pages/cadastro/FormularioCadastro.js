@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { Link, useHistory } from 'react-router-dom';
 import Stepper from '@material-ui/core/Stepper';
 import { Step } from '@material-ui/core/';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -43,10 +44,47 @@ function getStepContent(step) {
 function FormularioCadastro() {
   const classes = useStyles();
   const methods = useForm();
+  const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
-  const onSubmit = data => console.log(data);
+  async function onSubmit(data) {
+
+    const dadosCadastro = {
+        nome: data.nome,
+        email: data.email,
+        senha: data.senha,
+        retaurante: {
+          nome: data.nomeRestaurante,
+          idCategoria: data.idCategoria,
+          descricao: data.descricao,
+        taxaEntrega: data.taxaEntrega,
+        tempoEntregaEmMinutos: data.tempoEntregaEmMinutos,
+        valorMinimoPedido: data.valorMinimoPedido
+        }
+      }
+
+      console.log(dadosCadastro);
+
+    try {
+      const response = await fetch('http://localhost:8000/usuarios', {
+        method: 'POST',
+        body: JSON.stringify(dadosCadastro),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+      
+      const dataCadastro = await response.json();
+
+      console.log(dataCadastro);
+
+      history.push('/login')
+    } catch (error) {
+      console.log(error.message);
+    }
+    
+  }
   
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

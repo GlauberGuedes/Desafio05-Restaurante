@@ -15,7 +15,7 @@ function DadosRestaurante() {
                     id="nome_restaurante" 
                     type="text"
                     className="inputs"
-                    {...register("nome_restaurante")} 
+                    {...register("nomeRestaurante")} 
                 />
                 <label htmlFor="categoria">Categoria do restaurante</label>
                 <select 
@@ -23,21 +23,21 @@ function DadosRestaurante() {
                     type="text"
                     placeholder="Escolha uma categoria"
                     className="inputs"
-                    {...register("categoria")}
+                    {...register("idCategoria")}
                 >
                     <option value selected="categoria">Escolha uma categoria</option>
                     <hr />
-                    <option value="diversos">Diversos</option>
-                    <option value="Lanches">Lanches</option>
-                    <option value="Carnes">Carnes</option>
-                    <option value="Massas">Massas</option>
-                    <option value="Pizzas">Pizzas</option>
-                    <option value="Japonesa">Japonesa</option>
-                    <option value="Chinesa">Chinesa</option>
-                    <option value="Mexicano">Mexicano</option>
-                    <option value="Brasileira">Brasileira</option>
-                    <option value="Italiana">Italiana</option>
-                    <option value="Árabe">Árabe</option>
+                    <option value="1">Diversos</option>
+                    <option value="2">Lanches</option>
+                    <option value="3">Carnes</option>
+                    <option value="4">Massas</option>
+                    <option value="5">Pizzas</option>
+                    <option value="6">Japonesa</option>
+                    <option value="7">Chinesa</option>
+                    <option value="8">Mexicano</option>
+                    <option value="9">Brasileira</option>
+                    <option value="10">Italiana</option>
+                    <option value="11">Árabe</option>
                 </select>
                 <label htmlFor="descricao">Descrição</label>
                 <textarea 

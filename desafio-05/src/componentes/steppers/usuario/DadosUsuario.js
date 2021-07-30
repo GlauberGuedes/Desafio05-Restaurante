@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import SenhaInput from '../../InputSenha';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+import '../../InputSenha/style.css';
 
 function DadosUsuario() {
     const { register } = useFormContext();
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
 
     return (
         <div className="container-form">
@@ -23,18 +27,32 @@ function DadosUsuario() {
                         type="text"
                         {...register("email")} 
                     />
-                    <SenhaInput
-                        id="senha"
-                        label="Senha" 
-                        {...register("senha")}
-                    />
-                    <SenhaInput
-                        id="confirmar_senha"
-                        label="Repita a senha"
-                        {...register("confirmar_senha")}
-                    />
+                    <div className="flex-column input-senha">
+                        <label htmlFor="senha">Senha</label>
+                        <input 
+                            id="senha" 
+                            type={mostrarSenha ? "text" : "password"}
+                            {...register("senha")}
+                        />
+                        <FontAwesomeIcon 
+                            icon={mostrarSenha ? faEye : faEyeSlash} 
+                            className="visualizar-senha" 
+                            size="md" 
+                            onClick={() => setMostrarSenha(!mostrarSenha)} 
+                        />
+                        <label htmlFor="confirmar_senha">Confirmar Senha</label>
+                        <input 
+                            id="confirmar_senha" 
+                            type={mostrarSenha ? "text" : "password"}
+                        />
+                        <FontAwesomeIcon 
+                            icon={mostrarConfirmarSenha ? faEye : faEyeSlash} 
+                            className="visualizar-senha" 
+                            size="md" 
+                            onClick={() => setMostrarConfirmarSenha(!mostrarConfirmarSenha)} 
+                        />
+                    </div>
                 </div>
-                
             </form>
         </div>
     )

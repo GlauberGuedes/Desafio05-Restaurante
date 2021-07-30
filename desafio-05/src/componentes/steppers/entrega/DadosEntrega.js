@@ -14,20 +14,20 @@ function DadosEntrega() {
                     <input 
                         id="taxa_entrega" 
                         type="number"
-                        {...register("taxa_entrega")} 
+                        {...register("taxaEntrega")} 
                     />
-                    <label htmlFor="tempo_entrega">Tempo estimado de entrega</label>
+                    <label htmlFor="tempo_entrega_minutos">Tempo estimado de entrega</label>
                     <input 
-                        id="tempo_entrega" 
+                        id="tempo_entrega_minutos" 
                         type="number"
-                        {...register("tempo_entrega")} 
+                        {...register("tempoEntregaEmMinutos")} 
                     />
-                    <label htmlFor="valor_pedido">Valor mínimo do pedido</label>
+                    <label htmlFor="valor_minimo_pedido">Valor mínimo do pedido</label>
                     <input 
-                        id="valor-pedido" 
+                        id="valor_minimo_pedido" 
                         type="number" 
                         placeholder="R$ 00,00"
-                        {...register("valor_pedido")} 
+                        {...register("valorMinimoPedido")} 
                     />
                 </div>
             </form>

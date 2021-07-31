@@ -1,0 +1,53 @@
+.form-cadastro {
+    position: relative;
+    background-image: url('../../assets/bg-cadastro.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-height: 950px;
+}
+
+.steppers {
+    position: absolute;
+    margin-top: 6.2rem;
+    margin-left: 19rem;
+    z-index: 1;
+}
+
+.form-submits {
+    margin: 0;
+    padding: 0;
+    max-height: 950px;
+}
+
+.steps {
+    max-height: 900px;
+}
+
+.botoes-steppers {
+    margin: 0;
+    padding: 0;
+    max-height: 900px;
+}
+
+button {
+    border: none;
+    height: 40px;
+    width: 140px;
+    margin: 2rem 3.6rem 0 -4.2rem;
+    border-radius: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-ativado {
+    background-color: #D13201;
+    color: #fff;
+    cursor: pointer;
+}
+
+.botao-voltar {
+    color: #D13201;
+}

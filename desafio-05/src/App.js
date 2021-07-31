@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import Login from "./paginas/Login";
 import { AuthContextProvider } from "./contexto/AuthContext";
 import useAuth from "./hooks/useAuth";
+import './styles/global.css';
+import FormularioCadastro from './pages/cadastro/FormularioCadastro';
 
 function RotasProtegidas(props) {
   const { token } = useAuth();
@@ -17,6 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={Login} />
+          <Route path="/cadastro" component={FormularioCadastro} />
           <RotasProtegidas>
 
           </RotasProtegidas>

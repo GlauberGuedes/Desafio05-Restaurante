@@ -6,7 +6,7 @@ import Stepper from "@material-ui/core/Stepper";
 import { Step } from "@material-ui/core/";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
@@ -34,15 +34,15 @@ function getStepContent(step) {
   }
 }
 
-toast.error('Senha e confirmar senha devem ser iguais!', {
-  position: "bottom-center",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-});
+// toast.error('Senha e confirmar senha devem ser iguais!', {
+//   position: "bottom-center",
+//   autoClose: 5000,
+//   hideProgressBar: false,
+//   closeOnClick: true,
+//   pauseOnHover: true,
+//   draggable: true,
+//   progress: undefined,
+// });
 
 function FormularioCadastro() {
   const methods = useForm();
@@ -88,7 +88,9 @@ function FormularioCadastro() {
 
       setCarregando(false);
 
-      console.log(dataCadastro);
+      if(!response.ok) {
+        return setErro(dataCadastro);
+      }
 
       history.push("/");
     } catch (error) {
@@ -98,9 +100,11 @@ function FormularioCadastro() {
   }
 
   function handleNext(data) {
+    setErro("");
     if (data.senha) {
       if (data.senha !== data.confirmar_senha) {
-        toast.error("Senha e confirmar senha devem ser iguais!")
+        // toast.error("Senha e confirmar senha devem ser iguais!");
+        setErro("Senha e confirmar senha devem ser iguais!")
         return
       }
     }
@@ -131,6 +135,7 @@ function FormularioCadastro() {
               {getStepContent(activeStep)}
             </Typography>
             <button
+              type="button"
               className={activeStep === 0 ? "botao-cadastro desativado" : "botao-cadastro botao-voltar"}
               disabled={activeStep === 0}
               onClick={handleBack}

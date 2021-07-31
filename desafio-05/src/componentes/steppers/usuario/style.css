@@ -7,12 +7,9 @@
     left: 15rem;
     cursor: pointer;
     color: #BEBEBE;
+    top: 2.4rem;
 }
 
-.visualizar-senha{
-    top: 1.8rem;
-}
-
-.visualizar-confirmaSenha {
-    top: 8rem;
+.div-inputSenha {
+    position: relative;
 }

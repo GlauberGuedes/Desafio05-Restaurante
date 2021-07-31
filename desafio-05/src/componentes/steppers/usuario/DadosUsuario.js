@@ -30,6 +30,7 @@ function DadosUsuario() {
                         {...register("email")} 
                     />
                     <div className="flex-column input-senha">
+                        <div className="div-inputSenha flex-column">
                         <label className="label-cadastro" htmlFor="senha">Senha</label>
                         <input
                             className="input-cadastro" 
@@ -43,6 +44,8 @@ function DadosUsuario() {
                             size="lg" 
                             onClick={() => setMostrarSenha(!mostrarSenha)} 
                         />
+                        </div>
+                        <div className="div-inputSenha flex-column">
                         <label className="label-cadastro" htmlFor="confirmar_senha">Confirmar Senha</label>
                         <input 
                             className="input-cadastro"
@@ -56,6 +59,7 @@ function DadosUsuario() {
                             size="lg" 
                             onClick={() => setMostrarConfirmarSenha(!mostrarConfirmarSenha)} 
                         />
+                        </div>
                     </div>
                 </div>
             </form>

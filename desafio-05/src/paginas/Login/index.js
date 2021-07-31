@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { post } from '../../servicos/requisicaoAPI';
 import ilustracao from '../../assets/illustration.svg';
-import Carregando from "../../componentes/Carregando";
-import AlertaDeErro from "../../componentes/AlertaDeErro";
+//import Carregando from "../../componentes/Carregando";
+//import AlertaDeErro from "../../componentes/AlertaDeErro";
 import useAuth from '../../hooks/useAuth';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -58,11 +58,9 @@ export default function Login () {
             {visivel ? <VisibilityIcon/> : <VisibilityOffIcon/>}            
           </div>
         </div>
-        <button type="submit">Entrar</button>
+        <button className="botao-login" type="submit">Entrar</button>
         <p>Ainda não tem uma conta? <Link to="/cadastro">Cadastre-se</Link></p>
       </form>
-      <AlertaDeErro erro={erro}/>
-      <Carregando open={carregando}/>
     </div>
   );
 }

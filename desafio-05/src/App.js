@@ -1,10 +1,11 @@
-import "./App.css";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Login from "./paginas/Login";
 import { AuthContextProvider } from "./contexto/AuthContext";
 import useAuth from "./hooks/useAuth";
+import Login from "./paginas/Login";
+import FormularioCadastro from './paginas/cadastro/FormularioCadastro';
+
+import "./App.css";
 import './styles/global.css';
-import FormularioCadastro from './pages/cadastro/FormularioCadastro';
 
 function RotasProtegidas(props) {
   const { token } = useAuth();

@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import DadosUsuario from '../../componentes/steppers/usuario/DadosUsuario';
 import DadosRestaurante from '../../componentes/steppers/restaurante/DadosRestaurante';
 import DadosEntrega from '../../componentes/steppers/entrega/DadosEntrega';
-import Login from '../../pages/login';
+import Login from '../Login';
 
 import './style.css';
 
@@ -103,10 +103,12 @@ function FormularioCadastro() {
         <div className="form-submits" >
           <div className="botoes-steppers">
             <Typography className="steps">{getStepContent(activeStep)}</Typography>
-              <button className={activeStep === 0 ? "desativado" : "botao-voltar"} disabled={activeStep === 0} onClick={handleBack}>
-                Anterior
+              <button 
+                className={activeStep === 0 ? "desativado" : "botao-voltar"} disabled={activeStep === 0} onClick={handleBack}>
+                  Anterior
               </button>
-              <button className="botao-ativado"
+              <button 
+                className="botao-ativado botao-cadastro"
                 type={activeStep === steps.length ? 'submit' : 'button'}
                 onClick={activeStep === steps.length ? onsubmit : methods.handleSubmit(handleNext)}
               >

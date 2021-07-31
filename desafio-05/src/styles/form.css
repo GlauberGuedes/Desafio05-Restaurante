@@ -25,22 +25,22 @@ h1 {
     padding-bottom: 1.6rem;
 }
 
-label {
+.label-cadastro {
     padding: 0 0 0.5rem 0.5rem;
 }
 
-input, select, textarea {
+.input-cadastro, select, textarea {
     margin-bottom: 3.2rem;
     border: 0.5px solid #BEBEBE;
     border-radius: 0.5rem;
 }
 
-input {
+.input-cadastro {
     height: 2rem;
     width: 22rem;
 }
 
-button {
+.botao-cadastro {
     position: relative;
     bottom: 16rem;
     left: 13rem;

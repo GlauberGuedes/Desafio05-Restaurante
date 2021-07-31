@@ -15,21 +15,24 @@ function DadosUsuario() {
             <form>
                 <h1>Cadastro</h1>
                 <div className="flex-column form">
-                    <label htmlFor="nome">Nome de usuário</label>
+                    <label className="label-cadastro" htmlFor="nome">Nome de usuário</label>
                     <input 
+                        className="input-cadastro"
                         id="nome" 
                         type="text"
                         {...register("nome")} 
                     />
-                    <label htmlFor="email">E-mail</label>
-                    <input 
+                    <label className="label-cadastro" htmlFor="email">E-mail</label>
+                    <input
+                        className="input-cadastro" 
                         id="email" 
                         type="text"
                         {...register("email")} 
                     />
                     <div className="flex-column input-senha">
-                        <label htmlFor="senha">Senha</label>
-                        <input 
+                        <label className="label-cadastro" htmlFor="senha">Senha</label>
+                        <input
+                            className="input-cadastro" 
                             id="senha" 
                             type={mostrarSenha ? "text" : "password"}
                             {...register("senha")}
@@ -40,8 +43,9 @@ function DadosUsuario() {
                             size="md" 
                             onClick={() => setMostrarSenha(!mostrarSenha)} 
                         />
-                        <label htmlFor="confirmar_senha">Confirmar Senha</label>
+                        <label className="label-cadastro" htmlFor="confirmar_senha">Confirmar Senha</label>
                         <input 
+                            className="input-cadastro"
                             id="confirmar_senha" 
                             type={mostrarSenha ? "text" : "password"}
                             {...register("confirmar_senha")}

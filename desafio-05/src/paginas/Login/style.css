@@ -22,7 +22,7 @@
   flex-direction: column;
   padding: 64px 40px;
   gap: 24px;
-  max-width: 488px;
+  max-width: 480px;
   z-index: 1;
 }
 
@@ -30,21 +30,23 @@
   color: #D13201;
   font-size: 32px;
   line-height: 150%;
-  margin-bottom: 64px;
+  margin: 0 0 30px 20px;
   font-family:'Baloo 2', cursive;
 }
 
 .div-input {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 50px;
   position: relative;
+  margin-left: 20px;
 }
 
 .icone {
   position: absolute;
-  top: 40px;
-  right: 30px;
+  top: 62px;
+  right: 45px;
+  color: #BEBEBE;
   cursor: pointer;
 }
 
@@ -53,7 +55,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  margin-left: 16px;
+  margin: 20px 0 -20px 16px;
 }
 
 .div-input input {
@@ -62,6 +64,7 @@
   height: 47px;
   font-size: 18px;
   padding: 3px 0 3px 10px;
+  margin: -20px 0 -7px 0;
 }
 
 .form-login button {
@@ -74,12 +77,13 @@
   font-weight: 600;
   font-size: 14px;
   color: white;
-  margin-bottom: 24px;
   cursor: pointer;
+  margin-left: 40px;
 }
 
 .form-login p {
   font-size: 12px;
   color: #6F7377;
   text-align: center;
+  margin: 15px 20px 0 0;
 }

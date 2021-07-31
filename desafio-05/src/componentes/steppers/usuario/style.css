@@ -4,15 +4,15 @@
 
 .visualizar-senha, .visualizar-confirmaSenha {
     position: absolute;
-    left: 20rem;
+    left: 19.5rem;
     cursor: pointer;
     color: #BEBEBE;
 }
 
 .visualizar-senha{
-    top: 2.5rem;
+    top: 2.7rem;
 }
 
 .visualizar-confirmaSenha {
-    top: 9.7rem;
+    top: 10.7rem;
 }

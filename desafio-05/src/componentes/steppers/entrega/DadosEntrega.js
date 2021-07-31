@@ -12,7 +12,8 @@ function DadosEntrega() {
                 <div className="flex-column form">
                     <label htmlFor="taxa_entrega">Taxa de Entrega</label>
                     <input 
-                        id="taxa_entrega" 
+                        id="taxa_entrega"
+                        className="input-cadastro"
                         type="number"
                         {...register("taxaEntrega")} 
                     />
@@ -20,12 +21,14 @@ function DadosEntrega() {
                     <input 
                         id="tempo_entrega_minutos" 
                         type="number"
+                        className="input-cadastro"
                         {...register("tempoEntregaEmMinutos")} 
                     />
                     <label htmlFor="valor_minimo_pedido">Valor mínimo do pedido</label>
                     <input 
                         id="valor_minimo_pedido" 
-                        type="number" 
+                        type="number"
+                        className="input-cadastro"
                         placeholder="R$ 00,00"
                         {...register("valorMinimoPedido")} 
                     />

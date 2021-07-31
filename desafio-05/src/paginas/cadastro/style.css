@@ -3,7 +3,7 @@
     background-image: url('../../assets/bg-cadastro.png');
     background-repeat: no-repeat;
     background-size: cover;
-    max-height: 950px;
+    min-height: 100vh;
 }
 
 .steppers {

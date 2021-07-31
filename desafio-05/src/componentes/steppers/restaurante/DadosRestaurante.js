@@ -14,7 +14,7 @@ function DadosRestaurante() {
                 <input 
                     id="nome_restaurante" 
                     type="text"
-                    className="inputs"
+                    className="input-cadastro"
                     {...register("nomeRestaurante")} 
                 />
                 <label htmlFor="categoria">Categoria do restaurante</label>
@@ -22,7 +22,7 @@ function DadosRestaurante() {
                     id="categoria" 
                     type="text"
                     placeholder="Escolha uma categoria"
-                    className="inputs"
+                    className="input-cadastro"
                     {...register("idCategoria")}
                 >
                     <option value selected="categoria">Escolha uma categoria</option>

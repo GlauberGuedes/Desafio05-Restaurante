@@ -40,7 +40,7 @@ function DadosUsuario() {
                         <FontAwesomeIcon 
                             icon={mostrarSenha ? faEye : faEyeSlash} 
                             className="visualizar-senha" 
-                            size="md" 
+                            size="lg" 
                             onClick={() => setMostrarSenha(!mostrarSenha)} 
                         />
                         <label className="label-cadastro" htmlFor="confirmar_senha">Confirmar Senha</label>
@@ -53,7 +53,7 @@ function DadosUsuario() {
                         <FontAwesomeIcon 
                             icon={mostrarConfirmarSenha ? faEye : faEyeSlash} 
                             className="visualizar-confirmaSenha" 
-                            size="md" 
+                            size="lg" 
                             onClick={() => setMostrarConfirmarSenha(!mostrarConfirmarSenha)} 
                         />
                     </div>

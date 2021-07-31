@@ -1,22 +1,31 @@
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import Login from "./paginas/Login";
+import { AuthContextProvider } from "./contexto/AuthContext";
+import useAuth from "./hooks/useAuth";
 import './styles/global.css';
-import { 
-        BrowserRouter as Router, 
-        Route, 
-        Switch 
-      } from 'react-router-dom'
 import FormularioCadastro from './pages/cadastro/FormularioCadastro';
-import Login from './pages/login';
+
+function RotasProtegidas(props) {
+  const { token } = useAuth();
+  return (
+    <Route render={() => (token ? props.children : <Redirect to="/" />)} />
+  );
+}
 
 function App() {
   return (
-    <div className="App">
+    <AuthContextProvider>
       <Router>
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/cadastro" component={FormularioCadastro} />
+          <RotasProtegidas>
+
+          </RotasProtegidas>
         </Switch>
       </Router>
-    </div>
+    </AuthContextProvider>
   );
 }
 

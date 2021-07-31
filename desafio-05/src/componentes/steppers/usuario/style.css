@@ -1,15 +1,16 @@
 .input-senha {
-    position: relative;
+  position: relative;
 }
 
-.visualizar-senha, .visualizar-confirmaSenha {
-    position: absolute;
-    left: 15rem;
-    cursor: pointer;
-    color: #BEBEBE;
-    top: 2.4rem;
+.visualizar-senha,
+.visualizar-confirmaSenha {
+  position: absolute;
+  left: 15rem;
+  cursor: pointer;
+  color: #bebebe;
+  top: 2.4rem;
 }
 
 .div-inputSenha {
-    position: relative;
+  position: relative;
 }

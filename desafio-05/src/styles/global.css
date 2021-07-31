@@ -1,9 +1,18 @@
-@import './alinhamentos.css';
-@import './form.css';
+@import "./alinhamentos.css";
+@import "./form.css";
+@import url("./button.css");
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
 :root {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    height: 968px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 968px;
 }

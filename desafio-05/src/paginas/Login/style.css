@@ -1,7 +1,7 @@
 .container-login {
   position: relative;
-  background-image: url('../../assets/bg-login.png');
-  background-repeat:no-repeat;
+  background-image: url("../../assets/bg-login.png");
+  background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
   padding: 169px 0 242px 320px;
@@ -27,11 +27,11 @@
 }
 
 .form-login h1 {
-  color: #D13201;
+  color: #d13201;
   font-size: 32px;
   line-height: 150%;
-  margin: 0 0 30px 20px;
-  font-family:'Baloo 2', cursive;
+  margin: 0 0 20px 20px;
+  font-family: "Baloo 2", cursive;
 }
 
 .div-input {
@@ -46,12 +46,12 @@
   position: absolute;
   top: 62px;
   right: 35px;
-  color: #BEBEBE;
+  color: #bebebe;
   cursor: pointer;
 }
 
 .div-input label {
-  color: #393C40;
+  color: #393c40;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
@@ -59,7 +59,7 @@
 }
 
 .div-input input {
-  border: 1px solid #BEBEBE;
+  border: 1px solid #bebebe;
   border-radius: 7px;
   height: 47px;
   font-size: 18px;
@@ -68,7 +68,7 @@
 }
 
 .form-login button {
-  background: #D13201;
+  background: #d13201;
   border-radius: 20px;
   width: 126px;
   height: 40px;
@@ -79,11 +79,12 @@
   color: white;
   cursor: pointer;
   margin-left: 40px;
+  margin: 20px 0 0 0;
 }
 
 .form-login p {
   font-size: 12px;
-  color: #6F7377;
+  color: #6f7377;
   text-align: center;
   margin: 15px 20px 0 0;
 }

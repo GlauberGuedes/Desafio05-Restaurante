@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocalStorage } from "react-use";
 
 export default function useAuthProvider() {
-  const [value, setValue] = useLocalStorage('TOKEN', '');
+  const [value, setValue] = useLocalStorage("TOKEN", "");
   const [token, setToken] = useState(value);
 
   useEffect(() => {
@@ -11,6 +11,6 @@ export default function useAuthProvider() {
 
   return {
     token,
-    setToken
+    setToken,
   };
 }

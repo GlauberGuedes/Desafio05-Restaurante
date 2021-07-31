@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+
 import Stepper from "@material-ui/core/Stepper";
 import { Step } from "@material-ui/core/";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
+import { toast } from "react-toastify";
+
+import Carregando from "../../componentes/Carregando";
+import AlertaDeErro from "../../componentes/AlertaDeErro";
 import DadosUsuario from "../../componentes/steppers/usuario/DadosUsuario";
 import DadosRestaurante from "../../componentes/steppers/restaurante/DadosRestaurante";
 import DadosEntrega from "../../componentes/steppers/entrega/DadosEntrega";
@@ -29,10 +34,22 @@ function getStepContent(step) {
   }
 }
 
+toast.error('Senha e confirmar senha devem ser iguais!', {
+  position: "bottom-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
 function FormularioCadastro() {
   const methods = useForm();
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
   const steps = getSteps();
 
   async function onSubmit(data) {
@@ -50,7 +67,13 @@ function FormularioCadastro() {
       },
     };
 
-    console.log(dadosCadastro);
+    setErro('');
+
+    if(!data.nome || !data.email || !data.senha || !data.nomeRestaurante || !data.idCategoria || !data.descricao || !data.taxaEntrega || !data.tempoEntregaEmMinutos || !data.valorMinimoPedido) {
+      return setErro("Todos os campos são obrigatórios.")
+    }
+
+    setCarregando(true);
 
     try {
       const response = await fetch("http://localhost:8000/usuarios", {
@@ -63,18 +86,22 @@ function FormularioCadastro() {
 
       const dataCadastro = await response.json();
 
+      setCarregando(false);
+
       console.log(dataCadastro);
 
       history.push("/");
     } catch (error) {
-      console.log(error.message);
+      setCarregando(false);
+      setErro(error.message);
     }
   }
 
   function handleNext(data) {
     if (data.senha) {
       if (data.senha !== data.confirmar_senha) {
-        return console.log(data.confirmar_senha);
+        toast.error("Senha e confirmar senha devem ser iguais!")
+        return
       }
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -130,6 +157,8 @@ function FormularioCadastro() {
           </div>
         </div>
       </form>
+      <AlertaDeErro erro={erro}/>
+      <Carregando open={carregando}/>
     </FormProvider>
   );
 }

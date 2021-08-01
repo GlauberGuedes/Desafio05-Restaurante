@@ -74,20 +74,6 @@ function FormularioCadastro() {
 
     setErro("");
 
-    if (
-      !data.nome ||
-      !data.email ||
-      !data.senha ||
-      !data.nomeRestaurante ||
-      !data.idCategoria ||
-      !data.descricao ||
-      !data.taxaEntrega ||
-      !data.tempoEntregaEmMinutos ||
-      !data.valorMinimoPedido
-    ) {
-      return setErro("Todos os campos são obrigatórios.");
-    }
-
     setCarregando(true);
 
     try {

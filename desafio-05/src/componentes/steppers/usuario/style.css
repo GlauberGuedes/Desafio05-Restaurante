@@ -5,10 +5,10 @@
 .visualizar-senha,
 .visualizar-confirmaSenha {
   position: absolute;
-  left: 15rem;
+  left: 22.5rem;
   cursor: pointer;
   color: #bebebe;
-  top: 2.4rem;
+  top: 2.6rem;
 }
 
 .div-inputSenha {

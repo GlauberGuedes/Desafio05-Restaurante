@@ -1,0 +1,28 @@
+select {
+  height: 2.5rem;
+  width: 22.5rem;
+}
+
+#categoria {
+  font-family: "Montserrat", sans-serif;
+  color: #bebebe;
+  padding-left: 1rem;
+}
+
+textarea {
+  height: 5rem;
+}
+
+.text-area-legenda {
+  position: relative;
+  color: #6f7377;
+  font-weight: 400;
+  font-size: 12px;
+  bottom: 2.7rem;
+  left: 1.5rem;
+}
+
+option {
+  color: black;
+}
+

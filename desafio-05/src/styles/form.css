@@ -1,0 +1,75 @@
+.container-form {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 1024px;
+  width: 40%;
+  border-radius: 0px 0px 200px 0px;
+  padding: 3rem 0 0 4rem;
+  background-color: white;
+}
+
+.form {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #393c40;
+}
+
+h1 {
+  font-family: "Baloo 2", cursive;
+  font-weight: 700;
+  font-size: 32px;
+  color: #d13201;
+  padding-bottom: 3rem;
+}
+
+.label-cadastro {
+  padding: 0 0 0.2rem 0.5rem;
+  font-size: 16px;
+}
+
+.input-cadastro,
+select,
+textarea {
+  margin-bottom: 3rem;
+  border: 0.5px solid #bebebe;
+  border-radius: 0.5rem;
+}
+
+textarea {
+  font-size: 18px;
+  padding: 3px 0 3px 10px;
+}
+
+.input-cadastro {
+  height: 3rem;
+  width: 25.5rem;
+  font-size: 18px;
+  padding: 3px 0 3px 10px;
+}
+
+.botao-cadastro {
+  position: relative;
+  bottom: 11.5rem;
+  left: 11rem;
+}
+
+.links {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  color: #6f7377;
+  position: relative;
+  bottom: 5.5rem;
+  left: 8rem;
+  max-width: 180px;
+}
+
+.links span {
+  padding-right: 0.5rem;
+}
+
+.link-login {
+  color: #045787;
+}

@@ -13,17 +13,7 @@ import DadosRestaurante from "../../componentes/Steppers/restaurante/DadosRestau
 import DadosEntrega from "../../componentes/Steppers/entrega/DadosEntrega";
 import Login from "../Login";
 import useAuth from "../../hooks/useAuth";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 import "./style.css";
-
-const outerTheme = createTheme({
-  palette: {
-    primary: {
-      main: red[500],
-    },
-  },
-});
 
 function getSteps() {
   return ["", "", ""];
@@ -109,7 +99,6 @@ function FormularioCadastro() {
 
   return (
     <FormProvider {...methods}>
-      <ThemeProvider theme={outerTheme}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="form-cadastro"
@@ -161,7 +150,6 @@ function FormularioCadastro() {
             </div>
           </div>
         </form>
-      </ThemeProvider>
       <AlertaDeErro erro={erro} />
       <Carregando open={carregando} />
     </FormProvider>

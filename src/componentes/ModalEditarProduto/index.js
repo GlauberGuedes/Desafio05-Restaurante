@@ -8,17 +8,31 @@ import Switches from "../Switch";
 import Carregando from "../Carregando";
 import AlertaDeErro from "../AlertaDeErro";
 import InputImagem from "../InputImagem";
-import { postProduto } from "../../servicos/requisicaoAPI";
 import useAuth from "../../hooks/useAuth";
+import {
+  putProduto,
+  postDesativar,
+  postAtivar,
+} from "../../servicos/requisicaoAPI";
 
-export default function Modal({ listaDeProdutos }) {
+export default function ModalEditar({
+  produtoAtivado,
+  observacoesAtivada,
+  nomeProduto,
+  descricaoProduto,
+  precoProduto,
+  imagem,
+  id,
+  listaDeProdutos,
+}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [produtoAtivo, setProdutoAtivo] = useState(true);
-  const [permiteObservacoes, setPermiteObservacoes] = useState(true);
-  const [nome, setNome] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [preco, setPreco] = useState("");
+  const [produtoAtivo, setProdutoAtivo] = useState(produtoAtivado);
+  const [permiteObservacoes, setPermiteObservacoes] =
+    useState(observacoesAtivada);
+  const [nome, setNome] = useState(nomeProduto);
+  const [descricao, setDescricao] = useState(descricaoProduto);
+  const [preco, setPreco] = useState(precoProduto);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const { token } = useAuth();
@@ -29,12 +43,11 @@ export default function Modal({ listaDeProdutos }) {
 
   function fecharModal() {
     setOpen(false);
-    setErro("");
-    setNome("");
-    setDescricao("");
-    setPreco("");
-    setProdutoAtivo(true);
-    setPermiteObservacoes(true);
+    setNome(nomeProduto);
+    setDescricao(descricaoProduto);
+    setPreco(precoProduto);
+    setProdutoAtivo(produtoAtivado);
+    setPermiteObservacoes(observacoesAtivada);
   }
 
   async function onSubmit(e) {
@@ -43,24 +56,45 @@ export default function Modal({ listaDeProdutos }) {
     setCarregando(true);
 
     const data = {
-      nome: nome,
-      descricao: descricao,
-      preco: preco,
-      permiteObservacoes,
+      informacoes: {
+        nome: nome,
+        descricao: descricao,
+        preco: preco,
+        permiteObservacoes,
+      },
       ativo: produtoAtivo,
     };
 
     try {
-      const { dados, erro } = await postProduto("produtos", data, token);
-
-      setCarregando(false);
+      const { dados, erro } = await putProduto(
+        `produtos/${id}`,
+        data.informacoes,
+        token
+      );
 
       if (erro) {
+        setCarregando(false);
         return setErro(dados);
       }
 
+      if (data.ativo) {
+        const resposta = await postAtivar(`produtos/${id}/ativar`, token);
+
+        if (resposta.erro) {
+          setCarregando(false);
+          return setErro(resposta.dados);
+        }
+      } else {
+        const resposta = await postDesativar(`produtos/${id}/desativar`, token);
+
+        if (resposta.erro) {
+          setCarregando(false);
+          return setErro(resposta.dados);
+        }
+      }
+
+      setCarregando(false);
       listaDeProdutos();
-      fecharModal();
       setOpen(false);
     } catch (error) {
       setCarregando(false);
@@ -70,8 +104,8 @@ export default function Modal({ listaDeProdutos }) {
 
   return (
     <div className={classes.container}>
-      <button className="button bt-lg" type="button" onClick={abrirModal}>
-        Adicionar produto ao cardápio
+      <button className="button bt-md" type="button" onClick={abrirModal}>
+        Editar produto
       </button>
       <Dialog
         open={open}
@@ -82,7 +116,7 @@ export default function Modal({ listaDeProdutos }) {
       >
         <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <Typography variant="h1" className={classes.titulo}>
-            Novo produto
+            Editar produto
           </Typography>
           <DialogContent className={classes.conteudoForm}>
             <div className={classes.listaInputs}>
@@ -136,7 +170,7 @@ export default function Modal({ listaDeProdutos }) {
                 ativo={permiteObservacoes}
               />
             </div>
-            <InputImagem />
+            <InputImagem imagem={imagem} />
           </DialogContent>
           <DialogActions className={classes.botoes}>
             <button
@@ -146,8 +180,8 @@ export default function Modal({ listaDeProdutos }) {
             >
               Cancelar
             </button>
-            <button type="submit" className="button bt-lg">
-              Adicionar produto ao cardápio
+            <button type="submit" className="button bt-md">
+              Salvar alterações
             </button>
           </DialogActions>
           <AlertaDeErro erro={erro} />

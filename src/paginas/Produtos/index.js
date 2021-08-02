@@ -4,14 +4,14 @@ import ModalProduto from "../../componentes/ModalProduto";
 import ilustracao from "../../assets/illustration-2.svg";
 import useAuth from "../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
-import { postProduto, get } from "../../servicos/requisicaoAPI";
+import { get } from "../../servicos/requisicaoAPI";
 import Card from "../../componentes/Card";
 import { useState, useEffect } from "react";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
 
 export default function Produtos() {
-  const { setToken, token } = useAuth();
+  const { setToken, token, setRestaurante, restaurante } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const history = useHistory();
   const [erro, setErro] = useState("");
@@ -42,30 +42,8 @@ export default function Produtos() {
 
   function logout() {
     setToken("");
+    setRestaurante("");
     history.push("/");
-  }
-
-  async function cadastrarProduto(data) {
-    const { informacoes } = data;
-    const dadosProduto = { ...informacoes, ativo: data.ativo };
-
-    try {
-      const { dados, erro } = await postProduto(
-        "produtos",
-        dadosProduto,
-        token
-      );
-
-      if (erro) {
-        return { erro: dados };
-      }
-
-      await listaDeProdutos();
-
-      return { erro: false, cadastro: true };
-    } catch (error) {
-      throw error;
-    }
   }
 
   return (
@@ -73,7 +51,7 @@ export default function Produtos() {
       <img className="ilustracao2" src={ilustracao} alt="ilustracao" />
       <div className="header-produtos">
         <img className="logo" src={logo} alt="logo pizzaria" />
-        <h1>Pizza Pizzaria & Delivery</h1>
+        <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>
       <div className="conteudo-pagina">
@@ -85,13 +63,7 @@ export default function Produtos() {
           </p>
         )}
         <div className={produtos.length === 0 ? "" : "botao-modal"}>
-          <ModalProduto
-            nomeModal="Novo produto"
-            classeBotao="bt-lg"
-            textoBotao="Adicionar produto ao cardápio"
-            textoBotaoSubmit="Adicionar produto ao cardápio"
-            requisicaoProduto={cadastrarProduto}
-          />
+          <ModalProduto listaDeProdutos={listaDeProdutos} />
         </div>
         <div className="container-cards">
           {produtos.map((produto) => (
@@ -104,6 +76,8 @@ export default function Produtos() {
               id={produto.id}
               produtoAtivado={produto.ativo}
               observacoesAtivada={produto.permite_observacoes}
+              setErro={setErro}
+              erro={erro}
             />
           ))}
         </div>

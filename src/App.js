@@ -10,6 +10,16 @@ import Login from "./paginas/Login";
 import FormularioCadastro from "./paginas/Cadastro";
 import "./styles/global.css";
 import Produtos from "./paginas/Produtos";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { red } from "@material-ui/core/colors";
+
+const outerTheme = createTheme({
+  palette: {
+    primary: {
+      main: red[500],
+    },
+  },
+});
 
 function RotasProtegidas(props) {
   const { token } = useAuth();
@@ -20,17 +30,19 @@ function RotasProtegidas(props) {
 
 function App() {
   return (
-    <AuthContextProvider>
-      <Router>
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/cadastro" component={FormularioCadastro} />
-          <RotasProtegidas>
-            <Route path="/produtos" component={Produtos} />
-          </RotasProtegidas>
-        </Switch>
-      </Router>
-    </AuthContextProvider>
+    <ThemeProvider theme={outerTheme}>
+      <AuthContextProvider>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/cadastro" component={FormularioCadastro} />
+            <RotasProtegidas>
+              <Route path="/produtos" component={Produtos} />
+            </RotasProtegidas>
+          </Switch>
+        </Router>
+      </AuthContextProvider>
+    </ThemeProvider>
   );
 }
 

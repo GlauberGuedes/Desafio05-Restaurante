@@ -5,7 +5,6 @@ select {
 
 #categoria {
   font-family: "Montserrat", sans-serif;
-  color: #bebebe;
   padding-left: 1rem;
 }
 
@@ -20,9 +19,5 @@ textarea {
   font-size: 12px;
   bottom: 2.7rem;
   left: 1.5rem;
-}
-
-option {
-  color: black;
 }
 

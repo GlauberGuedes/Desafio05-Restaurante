@@ -7,7 +7,7 @@ import {
 import { AuthContextProvider } from "./contexto/AuthContext";
 import useAuth from "./hooks/useAuth";
 import Login from "./paginas/Login";
-import FormularioCadastro from "./paginas/cadastro/FormularioCadastro";
+import FormularioCadastro from "./paginas/Cadastro";
 import "./styles/global.css";
 import Produtos from "./paginas/Produtos";
 

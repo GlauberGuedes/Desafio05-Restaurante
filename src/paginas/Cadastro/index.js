@@ -8,9 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import { post } from "../../servicos/requisicaoAPI";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
-import DadosUsuario from "../../componentes/steppers/usuario/DadosUsuario";
-import DadosRestaurante from "../../componentes/steppers/restaurante/DadosRestaurante";
-import DadosEntrega from "../../componentes/steppers/entrega/DadosEntrega";
+import DadosUsuario from "../../componentes/Steppers/usuario/DadosUsuario";
+import DadosRestaurante from "../../componentes/Steppers/restaurante/DadosRestaurante";
+import DadosEntrega from "../../componentes/Steppers/entrega/DadosEntrega";
 import Login from "../Login";
 import useAuth from "../../hooks/useAuth";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -115,12 +115,10 @@ function FormularioCadastro() {
           className="form-cadastro"
         >
           <Stepper className="steppers" activeStep={activeStep}>
-            {steps.map((label) => {
-              const stepProps = {};
-              const labelProps = {};
+            {steps.map((label) => {      
               return (
-                <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
                 </Step>
               );
             })}

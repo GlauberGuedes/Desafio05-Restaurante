@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import "./style.css";
 import { get } from "../../../servicos/requisicaoAPI";
-import Carregando from "../../../componentes/Carregando";
-import AlertaDeErro from "../../../componentes/AlertaDeErro";
+import Carregando from "../../Carregando";
+import AlertaDeErro from "../../AlertaDeErro";
 
 function DadosRestaurante() {
   const { register } = useFormContext();

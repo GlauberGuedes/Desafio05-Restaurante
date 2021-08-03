@@ -13,6 +13,7 @@ export default function ModalDelete({
   setErro,
   setCarregando,
   listaDeProdutos,
+  setConfirmacao,
 }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -31,6 +32,7 @@ export default function ModalDelete({
   }
 
   async function removerProduto() {
+    setConfirmacao("");
     setErro("");
     setCarregando(true);
     try {
@@ -45,6 +47,7 @@ export default function ModalDelete({
 
       await listaDeProdutos();
 
+      setConfirmacao("Produto deletado com sucesso.");
       return;
     } catch (error) {
       setCarregando(false);

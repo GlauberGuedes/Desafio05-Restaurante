@@ -47,6 +47,15 @@ function FormularioCadastro() {
     }
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
+
   async function onSubmit(data) {
     const dadosCadastro = {
       nome: data.nome,

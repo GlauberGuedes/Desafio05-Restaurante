@@ -4,7 +4,7 @@ import ModalEditarProduto from "../../componentes/ModalEditarProduto";
 import ModalDelete from "../../componentes/ModalDelete";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Card({
   nome,
@@ -14,10 +14,19 @@ export default function Card({
   id,
   produtoAtivado,
   observacoesAtivada,
-  setErro,
-  erro,
+  setConfirmacao,
 }) {
   const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
 
   return (
     <div className="container-card">
@@ -40,6 +49,7 @@ export default function Card({
           setCarregando={setCarregando}
           id={id}
           listaDeProdutos={listaDeProdutos}
+          setConfirmacao={setConfirmacao}
         />
         <ModalEditarProduto
           id={id}

@@ -24,6 +24,15 @@ export default function Login() {
     }
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
+
   async function onSubmit(data) {
     setErro("");
     if (!data.email || !data.senha) {

@@ -3,7 +3,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Switches from "../Switch";
 import Carregando from "../Carregando";
 import AlertaDeErro from "../AlertaDeErro";
@@ -36,6 +36,15 @@ export default function ModalEditar({
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const { token } = useAuth();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
 
   function abrirModal() {
     setOpen(true);
@@ -93,8 +102,8 @@ export default function ModalEditar({
         }
       }
 
+      await listaDeProdutos();
       setCarregando(false);
-      listaDeProdutos();
       setOpen(false);
     } catch (error) {
       setCarregando(false);

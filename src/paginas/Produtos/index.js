@@ -9,6 +9,7 @@ import Card from "../../componentes/Card";
 import { useState, useEffect } from "react";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
+import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 
 export default function Produtos() {
   const { setToken, token, setRestaurante, restaurante } = useAuth();
@@ -16,6 +17,25 @@ export default function Produtos() {
   const history = useHistory();
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [confirmacao, setConfirmacao] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setConfirmacao("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [confirmacao]);
 
   async function listaDeProdutos() {
     setCarregando(true);
@@ -76,13 +96,13 @@ export default function Produtos() {
               id={produto.id}
               produtoAtivado={produto.ativo}
               observacoesAtivada={produto.permite_observacoes}
-              setErro={setErro}
-              erro={erro}
+              setConfirmacao={setConfirmacao}
             />
           ))}
         </div>
       </div>
       <AlertaDeErro erro={erro} />
+      <AlertaDeConfirmacao mensagem={confirmacao} />
       <Carregando open={carregando} />
     </div>
   );

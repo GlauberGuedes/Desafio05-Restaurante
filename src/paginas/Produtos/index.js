@@ -97,6 +97,7 @@ export default function Produtos() {
               produtoAtivado={produto.ativo}
               observacoesAtivada={produto.permite_observacoes}
               setConfirmacao={setConfirmacao}
+              imagem={produto.imagem}
             />
           ))}
         </div>

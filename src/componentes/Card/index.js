@@ -14,6 +14,7 @@ export default function Card({
   id,
   produtoAtivado,
   observacoesAtivada,
+  imagem,
   setConfirmacao,
 }) {
   const [carregando, setCarregando] = useState(false);
@@ -41,7 +42,7 @@ export default function Card({
             })}
           </span>
         </div>
-        <img src={pizza} alt="imagem do produto" />
+        <img src={imagem} alt="imagem do produto" />
       </div>
       <div className="botoes-card">
         <ModalDelete
@@ -58,7 +59,7 @@ export default function Card({
           nomeProduto={nome}
           descricaoProduto={descricao}
           precoProduto={preco}
-          imagem={pizza}
+          imagem={imagem}
           listaDeProdutos={listaDeProdutos}
         />
       </div>

@@ -2,8 +2,29 @@ import PublishIcon from "@material-ui/icons/Publish";
 import imagemVazia from "../../assets/imagem-vazia.svg";
 import useStyles from "./style";
 
-export default function InputImagem({ imagem }) {
+export default function InputImagem({ imagem, setBase64Imagem }) {
   const classes = useStyles();
+
+  const uploadImagem = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBase64Imagem(base64);
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
 
   return (
     <div className={classes.containerImagem}>
@@ -27,7 +48,7 @@ export default function InputImagem({ imagem }) {
       </label>
       <input
         className={classes.inputImagem}
-        onChange={(e) => console.log(e.target.files)}
+        onChange={(e) => uploadImagem(e)}
         type="file"
         id="file"
       />

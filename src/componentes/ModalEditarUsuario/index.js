@@ -11,6 +11,7 @@ import AlertaDeErro from "../AlertaDeErro";
 import InputImagem from "../InputImagem";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/pizzaria.png";
+import { get } from "../../servicos/requisicaoAPI";
 
 export default function ModalEditarUsuario({
   nomeUsuario,
@@ -26,11 +27,13 @@ export default function ModalEditarUsuario({
   imagemUsuario,
 }) {
   const classes = useStyles();
+  const { setToken, token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState(nomeUsuario);
   const [email, setEmail] = useState(emailUsuario);
-  const [restaurante, setRestaurante] = useState(nomeRestaurante);
+  const [nomeUsuarioRestaurante, setNomeUsuarioRestaurante] = useState(nomeRestaurante);
   const [categoria, setCategoria] = useState(categoriaRestaurante);
+  const [categorias, setCategorias] = useState([]);
   const [descricao, setDescricao] = useState(descricaoRestaurante);
   const [entrega, setEntrega] = useState(taxaEntrega);
   const [tempo, setTempo] = useState(tempoEntrega);
@@ -41,7 +44,6 @@ export default function ModalEditarUsuario({
   const [carregando, setCarregando] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
-  const { token } = useAuth();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -70,6 +72,29 @@ export default function ModalEditarUsuario({
     setConfirmaSenha(confirmaSenhaCadastro);
   }
 
+  useEffect(() => {
+    listaDeCategorias();
+  }, []);
+
+  async function listaDeCategorias() {
+    setErro("");
+    setCarregando(true);
+    try {
+      const { dados, erro } = await get("categorias");
+
+      setCarregando(false);
+      if (erro) {
+        return setErro(dados);
+      }
+
+      setCategorias(dados);
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
+  }
+  
+
   return (
     <div className={classes.container}>
       <img className={classes.logo} src={logo} alt="logo restaurante" onClick={abrirModal} />
@@ -96,6 +121,7 @@ export default function ModalEditarUsuario({
                   className={classes.input}
                   type="text"
                   id="nome"
+                  placeholder={usuario.nome}
                 />
               </div>
               <div className={classes.divInput}>
@@ -108,6 +134,7 @@ export default function ModalEditarUsuario({
                   className={classes.input}
                   type="text"
                   id="email"
+                  placeholder={usuario.email}
                 />
               </div>
               <div className={classes.divInput}>
@@ -115,11 +142,12 @@ export default function ModalEditarUsuario({
                   Nome do restaurante
                 </label>
                 <input
-                  value={restaurante}
-                  onChange={(e) => setRestaurante(e.target.value)}
+                  value={nomeUsuarioRestaurante}
+                  onChange={(e) => setNomeUsuarioRestaurante(e.target.value)}
                   className={classes.input}
                   type="text"
                   id="nome_restaurante"
+                  
                 />
               </div>
               <div className={classes.divInput}>
@@ -132,10 +160,15 @@ export default function ModalEditarUsuario({
                   className={classes.selectCategoria}
                   type="text"
                   id="categoria"
+                  placeholder="Escolha uma categoria"
                 >
                   <option value="" selected="categoria">
                     Escolha uma categoria
                   </option>
+                  <hr />
+                  {categorias.map((categoria) => (
+                    <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
+                  ))}
                 </select>
               </div>
               <div className={classes.divInput}>

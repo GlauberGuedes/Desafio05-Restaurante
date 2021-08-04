@@ -1,5 +1,4 @@
 import "./style.css";
-import logo from "../../assets/pizzaria.png";
 import ModalProduto from "../../componentes/ModalProduto";
 import ilustracao from "../../assets/illustration-2.svg";
 import useAuth from "../../hooks/useAuth";
@@ -13,14 +12,7 @@ import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 
 import ModalEditarUsuario from "../../componentes/ModalEditarUsuario";
 
-export default function Produtos({nome,
-  descricao,
-  preco,
-  listaDeProdutos,
-  id,
-  produtoAtivado,
-  observacoesAtivada,
-  }) {
+export default function Produtos() {
   const { setToken, token, setRestaurante, restaurante } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const history = useHistory();
@@ -114,15 +106,7 @@ export default function Produtos({nome,
           backgroundRepeat: "no-repeat",
         }}
       >
-        <ModalEditarUsuario
-          id={id}
-          produtoAtivado={produtoAtivado}
-          observacoesAtivada={observacoesAtivada}
-          nomeProduto={nome}
-          descricaoProduto={descricao}
-          precoProduto={preco}
-          listaDeProdutos={listaDeProdutos}
-         />
+        <ModalEditarUsuario/>
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>

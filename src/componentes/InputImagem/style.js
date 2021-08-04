@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   containerImagem: {
     width: 384,
-    heigth: 384,
+    maxHeight: 384,
     marginBottom: 50,
     display: "flex",
     flexDirection: "column",

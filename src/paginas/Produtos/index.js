@@ -18,6 +18,7 @@ export default function Produtos() {
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [confirmacao, setConfirmacao] = useState("");
+  const [imagemCategoria, setImagemCategoria] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -36,6 +37,28 @@ export default function Produtos() {
       clearTimeout(timeout);
     };
   }, [confirmacao]);
+
+  async function listaCategorias() {
+    setErro("");
+    setCarregando(true);
+    try {
+      const { dados, erro } = await get("categorias");
+
+      setCarregando(false);
+      if (erro) {
+        return setErro(dados);
+      }
+
+      const categoria = dados.find(
+        (item) => item.id === restaurante.categoria_id
+      );
+
+      setImagemCategoria(categoria.imagem);
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
+  }
 
   async function listaDeProdutos() {
     setCarregando(true);
@@ -57,6 +80,7 @@ export default function Produtos() {
   }
 
   useEffect(() => {
+    listaCategorias();
     listaDeProdutos();
   }, []);
 
@@ -69,7 +93,18 @@ export default function Produtos() {
   return (
     <div className="container-produtos">
       <img className="ilustracao2" src={ilustracao} alt="ilustracao" />
-      <div className="header-produtos">
+      <div
+        className="header-produtos"
+        style={{
+          backgroundImage: `linear-gradient(
+      205.02deg,
+      rgba(18, 18, 18, 0.2) 36.52%,
+      rgba(18, 18, 18, 0.8) 77.14%
+    ), url(${imagemCategoria})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <img className="logo" src={logo} alt="logo pizzaria" />
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>

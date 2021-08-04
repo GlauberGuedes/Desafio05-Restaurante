@@ -26,6 +26,7 @@ function DadosEntrega() {
             id="tempo_entrega_minutos"
             type="number"
             className="input-cadastro"
+            placeholder="Tempo em minutos"
             {...register("tempoEntregaEmMinutos")}
           />
           <label className="label-cadastro" htmlFor="valor_minimo_pedido">

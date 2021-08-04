@@ -9,14 +9,6 @@
 }
 
 .header-produtos {
-  background: linear-gradient(
-      205.02deg,
-      rgba(18, 18, 18, 0.2) 36.52%,
-      rgba(18, 18, 18, 0.8) 77.14%
-    ),
-    url("../../assets/bg-pizzaria.png");
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   height: 245px;
   width: 100%;

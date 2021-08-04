@@ -42,7 +42,7 @@ export default function Card({
             })}
           </span>
         </div>
-        <img src={imagem} alt="imagem do produto" />
+        {imagem && <img src={imagem} alt="imagem do produto" />}
       </div>
       <div className="botoes-card">
         <ModalDelete

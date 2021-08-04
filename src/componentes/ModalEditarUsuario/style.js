@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: 7,
+    position: "relative",
   },
   label: {
     color: "#393C40",
@@ -104,15 +105,17 @@ const useStyles = makeStyles((theme) => ({
   },
   iconSenha: {
     position: "absolute",
-    left: 426,
-    top: 1008,
+    left: 350,
+    top: 40,
     color: "#bebebe",
+    cursor: "pointer",
   },
   iconConfirmaSenha: {
     position: "absolute",
-    left: 426,
-    top: 1106,
+    left: 350,
+    top: 40,
     color: "#bebebe",
+    cursor: "pointer",
   },
   imagemPerfil: {
     display: "flex",

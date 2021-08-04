@@ -19,7 +19,7 @@ export default function Produtos() {
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [confirmacao, setConfirmacao] = useState("");
-  const [imagemCategoria, setImagemCategoria] = useState("");
+  const [categoria, setCategoria] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -50,11 +50,11 @@ export default function Produtos() {
         return setErro(dados);
       }
 
-      const categoria = dados.find(
+      const categoriaRestaurante = dados.find(
         (item) => item.id === restaurante.categoria_id
       );
 
-      setImagemCategoria(categoria.imagem);
+      setCategoria(categoriaRestaurante);
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -101,12 +101,12 @@ export default function Produtos() {
       205.02deg,
       rgba(18, 18, 18, 0.2) 36.52%,
       rgba(18, 18, 18, 0.8) 77.14%
-    ), url(${imagemCategoria})`,
+    ), url(${categoria.imagem})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <ModalEditarUsuario/>
+        <ModalEditarUsuario categoriaRestaurante={categoria}/>
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>

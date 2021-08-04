@@ -14,32 +14,23 @@ import logo from "../../assets/pizzaria.png";
 import { get } from "../../servicos/requisicaoAPI";
 
 export default function ModalEditarUsuario({
-  nomeUsuario,
-  emailUsuario,
-  nomeRestaurante,
   categoriaRestaurante,
-  descricaoRestaurante,
-  taxaEntrega,
-  tempoEntrega,
-  valorMinimoEntrega,
-  senhaCadastro,
-  confirmaSenhaCadastro,
   imagemUsuario,
 }) {
   const classes = useStyles();
   const { setToken, token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
   const [open, setOpen] = useState(false);
-  const [nome, setNome] = useState(nomeUsuario);
-  const [email, setEmail] = useState(emailUsuario);
-  const [nomeUsuarioRestaurante, setNomeUsuarioRestaurante] = useState(nomeRestaurante);
-  const [categoria, setCategoria] = useState(categoriaRestaurante);
+  const [nome, setNome] = useState(usuario.nome);
+  const [email, setEmail] = useState(usuario.email);
+  const [nomeUsuarioRestaurante, setNomeUsuarioRestaurante] = useState(restaurante.nome);
+  const [categoria, setCategoria] = useState(categoriaRestaurante.id);
   const [categorias, setCategorias] = useState([]);
-  const [descricao, setDescricao] = useState(descricaoRestaurante);
-  const [entrega, setEntrega] = useState(taxaEntrega);
-  const [tempo, setTempo] = useState(tempoEntrega);
-  const [valorMinimo, setValorMinimo] = useState(valorMinimoEntrega);
-  const [senha, setSenha] = useState(senhaCadastro);
-  const [confirmaSenha, setConfirmaSenha] = useState(confirmaSenhaCadastro);
+  const [descricao, setDescricao] = useState(restaurante.descricao);
+  const [entrega, setEntrega] = useState(restaurante.taxa_entrega);
+  const [tempo, setTempo] = useState(restaurante.tempo_entrega_minutos);
+  const [valorMinimo, setValorMinimo] = useState(restaurante.valor_minimo_pedido);
+  const [senha, setSenha] = useState("");
+  const [confirmaSenha, setConfirmaSenha] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -60,16 +51,16 @@ export default function ModalEditarUsuario({
 
   function fecharModal() {
     setOpen(false);
-    setNome(nomeUsuario);
-    setEmail(emailUsuario);
-    setRestaurante(nomeRestaurante);
-    setCategoria(categoriaRestaurante);
-    setDescricao(descricaoRestaurante);
-    setEntrega(taxaEntrega);
-    setTempo(tempoEntrega);
-    setValorMinimo(valorMinimoEntrega);
-    setSenha(senhaCadastro);
-    setConfirmaSenha(confirmaSenhaCadastro);
+    setNome(usuario.nome);
+    setEmail(usuario.email);
+    setNomeUsuarioRestaurante(restaurante.nome);
+    setCategoria(categoriaRestaurante.id);
+    setDescricao(restaurante.descricao);
+    setEntrega(restaurante.taxa_entrega);
+    setTempo(restaurante.tempo_entrega_minutos);
+    setValorMinimo(restaurante.valor_minimo_pedido);
+    setSenha("");
+    setConfirmaSenha("");
   }
 
   useEffect(() => {
@@ -162,8 +153,8 @@ export default function ModalEditarUsuario({
                   id="categoria"
                   placeholder="Escolha uma categoria"
                 >
-                  <option value="" selected="categoria">
-                    Escolha uma categoria
+                  <option value={categoriaRestaurante.id} selected="categoria">
+                    {categoriaRestaurante.nome}
                   </option>
                   <hr />
                   {categorias.map((categoria) => (
@@ -228,7 +219,7 @@ export default function ModalEditarUsuario({
                   Senha
                 </label>
                 <input
-                  value={senhaCadastro}
+                  value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   className={classes.input}
                   type={mostrarSenha ? "text" : "password"}
@@ -246,10 +237,10 @@ export default function ModalEditarUsuario({
                   Repita a senha
                 </label>
                 <input
-                  value={confirmaSenhaCadastro}
+                  value={confirmaSenha}
                   onChange={(e) => setConfirmaSenha(e.target.value)}
                   className={classes.input}
-                  type={mostrarSenha ? "text" : "password"}
+                  type={mostrarConfirmarSenha ? "text" : "password"}
                   id="confirma_senha"
                 />
                 <FontAwesomeIcon

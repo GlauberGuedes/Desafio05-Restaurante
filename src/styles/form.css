@@ -6,7 +6,7 @@
   height: 1024px;
   width: 40%;
   border-radius: 0px 0px 200px 0px;
-  padding: 3rem 0 0 4rem;
+  padding: 3rem 0 0 6rem;
   background-color: white;
 }
 
@@ -53,7 +53,7 @@ textarea {
 .botao-cadastro {
   position: relative;
   bottom: 11.5rem;
-  left: 11rem;
+  left: 15rem;
 }
 
 .links {
@@ -62,7 +62,7 @@ textarea {
   color: #6f7377;
   position: relative;
   bottom: 5.5rem;
-  left: 8rem;
+  left: 12.5rem;
   max-width: 180px;
 }
 

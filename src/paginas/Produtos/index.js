@@ -11,7 +11,16 @@ import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
 import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 
-export default function Produtos() {
+import ModalEditarUsuario from "../../componentes/ModalEditarUsuario";
+
+export default function Produtos({nome,
+  descricao,
+  preco,
+  listaDeProdutos,
+  id,
+  produtoAtivado,
+  observacoesAtivada,
+  }) {
   const { setToken, token, setRestaurante, restaurante } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const history = useHistory();
@@ -70,7 +79,15 @@ export default function Produtos() {
     <div className="container-produtos">
       <img className="ilustracao2" src={ilustracao} alt="ilustracao" />
       <div className="header-produtos">
-        <img className="logo" src={logo} alt="logo pizzaria" />
+        <ModalEditarUsuario
+          id={id}
+          produtoAtivado={produtoAtivado}
+          observacoesAtivada={observacoesAtivada}
+          nomeProduto={nome}
+          descricaoProduto={descricao}
+          precoProduto={preco}
+          listaDeProdutos={listaDeProdutos}
+         />
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>

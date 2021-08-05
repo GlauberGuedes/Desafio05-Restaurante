@@ -13,17 +13,14 @@ import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/pizzaria.png";
 import { get, putUsuario } from "../../servicos/requisicaoAPI";
 
-export default function ModalEditarUsuario({
-  categoriaRestaurante,
-  imagemUsuario,
-}) {
+export default function ModalEditarUsuario() {
   const classes = useStyles();
   const { setToken, token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState(usuario.nome);
   const [email, setEmail] = useState(usuario.email);
   const [nomeUsuarioRestaurante, setNomeUsuarioRestaurante] = useState(restaurante.nome);
-  const [categoria, setCategoria] = useState(categoriaRestaurante.id);
+  const [categoria, setCategoria] = useState(restaurante.categoria_id);
   const [categorias, setCategorias] = useState([]);
   const [descricao, setDescricao] = useState(restaurante.descricao);
   const [entrega, setEntrega] = useState(restaurante.taxa_entrega);
@@ -56,7 +53,7 @@ export default function ModalEditarUsuario({
     setNome(usuario.nome);
     setEmail(usuario.email);
     setNomeUsuarioRestaurante(restaurante.nome);
-    setCategoria(categoriaRestaurante.id);
+    setCategoria(restaurante.categoria_id);
     setDescricao(restaurante.descricao);
     setEntrega(restaurante.taxa_entrega);
     setTempo(restaurante.tempo_entrega_minutos);
@@ -119,10 +116,13 @@ export default function ModalEditarUsuario({
         setCarregando(false);
         return setErro(dados);
       }
+
+
       setRestaurante(dados.restaurante);
       setUsuario(dados.usuario);
       setCarregando(false);
       setOpen(false);
+      
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -193,8 +193,8 @@ export default function ModalEditarUsuario({
                   id="categoria"
                   placeholder="Escolha uma categoria"
                 >
-                  <option value={categoriaRestaurante.id} selected="categoria">
-                    {categoriaRestaurante.nome}
+                  <option value={restaurante.categoria_id} selected="categoria">
+                    {restaurante.nomeCategoria}
                   </option>
                   <hr />
                   {categorias.map((categoria) => (
@@ -292,7 +292,7 @@ export default function ModalEditarUsuario({
               </div>
             </div>
             <div className={classes.imagemPerfil}>
-              <InputImagem imagem={imagemUsuario} setBase64Imagem={setBase64Imagem}/>
+              <InputImagem imagem={restaurante.imagem} setBase64Imagem={setBase64Imagem}/>
             </div>
           </DialogContent>
           <DialogActions className={classes.botoes}>

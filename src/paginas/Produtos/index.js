@@ -13,13 +13,12 @@ import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 import ModalEditarUsuario from "../../componentes/ModalEditarUsuario";
 
 export default function Produtos() {
-  const { setToken, token, setRestaurante, restaurante } = useAuth();
+  const { setToken, token, setRestaurante, restaurante, setUsuario } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const history = useHistory();
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [confirmacao, setConfirmacao] = useState("");
-  const [categoria, setCategoria] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -38,28 +37,6 @@ export default function Produtos() {
       clearTimeout(timeout);
     };
   }, [confirmacao]);
-
-  async function listaCategorias() {
-    setErro("");
-    setCarregando(true);
-    try {
-      const { dados, erro } = await get("categorias");
-
-      setCarregando(false);
-      if (erro) {
-        return setErro(dados);
-      }
-
-      const categoriaRestaurante = dados.find(
-        (item) => item.id === restaurante.categoria_id
-      );
-
-      setCategoria(categoriaRestaurante);
-    } catch (error) {
-      setCarregando(false);
-      setErro(error.message);
-    }
-  }
 
   async function listaDeProdutos() {
     setCarregando(true);
@@ -81,13 +58,13 @@ export default function Produtos() {
   }
 
   useEffect(() => {
-    listaCategorias();
     listaDeProdutos();
   }, []);
 
   function logout() {
     setToken("");
     setRestaurante("");
+    setUsuario("");
     history.push("/");
   }
 
@@ -101,12 +78,12 @@ export default function Produtos() {
       205.02deg,
       rgba(18, 18, 18, 0.2) 36.52%,
       rgba(18, 18, 18, 0.8) 77.14%
-    ), url(${categoria.imagem})`,
+    ), url(${restaurante.imagemCategoria})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <ModalEditarUsuario categoriaRestaurante={categoria} imagemUsuario={restaurante.imagem}/>
+        <ModalEditarUsuario/>
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>

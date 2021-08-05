@@ -61,7 +61,7 @@ export default function Modal({ listaDeProdutos }) {
       permiteObservacoes,
       ativo: produtoAtivo,
     };
-
+    
     try {
       const { dados, erro } = await postProduto("produtos", data, token);
 

@@ -8,9 +8,8 @@ export default function InputImagem({ imagem, setBase64Imagem }) {
   const uploadImagem = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
-    const base = base64.replace("data:image/png;base64,iVBO", "");
+    const base = base64.replace("data:image/png;base64,", "");
     setBase64Imagem(base);
-    console.log(base);
   };
 
   const convertBase64 = (file) => {

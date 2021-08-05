@@ -61,7 +61,7 @@ export default function ModalEditarUsuario({
     setEntrega(restaurante.taxa_entrega);
     setTempo(restaurante.tempo_entrega_minutos);
     setValorMinimo(restaurante.valor_minimo_pedido);
-    setBase64Imagem(restaurante.imagem);
+    setBase64Imagem("");
     setSenha("");
     setConfirmaSenha("");
   }
@@ -108,18 +108,19 @@ export default function ModalEditarUsuario({
       },
     };
 
-
     try {
       const { dados, erro } = await putUsuario(
         'usuarios',
         dadosCadastro,
         token
       );
-        console.log(dadosCadastro);
+        
       if (erro) {
         setCarregando(false);
         return setErro(dados);
       }
+      setRestaurante(dados.restaurante);
+      setUsuario(dados.usuario);
       setCarregando(false);
       setOpen(false);
     } catch (error) {
@@ -130,7 +131,7 @@ export default function ModalEditarUsuario({
 
   return (
     <div className={classes.container}>
-      <img className={classes.logo} src={base64Imagem} alt="logo restaurante" onClick={abrirModal} />
+      <img className={classes.logo} src={restaurante.imagem} alt="logo restaurante" onClick={abrirModal} />
       <Dialog
         open={open}
         onClose={fecharModal}

@@ -90,10 +90,7 @@ export async function putUsuario(endPoint, data, token) {
       headers,
     });
 
-    let dados;
-    if (!resposta.ok) {
-      dados = await resposta.json();
-    }
+    const dados = await resposta.json();
 
     return { dados, erro: !resposta.ok };
   } catch (error) {

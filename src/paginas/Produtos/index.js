@@ -106,7 +106,7 @@ export default function Produtos() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <ModalEditarUsuario categoriaRestaurante={categoria}/>
+        <ModalEditarUsuario categoriaRestaurante={categoria} imagemUsuario={restaurante.imagem}/>
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>

@@ -19,6 +19,7 @@ export default function Produtos() {
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [confirmacao, setConfirmacao] = useState("");
+  const [confirmacaoCadastro, setConfirmacaoCadastro] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -37,6 +38,15 @@ export default function Produtos() {
       clearTimeout(timeout);
     };
   }, [confirmacao]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setConfirmacaoCadastro("");
+    }, 4000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [confirmacaoCadastro]);
 
   async function listaDeProdutos() {
     setCarregando(true);
@@ -83,7 +93,9 @@ export default function Produtos() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <ModalEditarUsuario/>
+        <ModalEditarUsuario
+          setConfirmacaoCadastro={setConfirmacaoCadastro}
+        />
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>
       </div>
@@ -117,6 +129,7 @@ export default function Produtos() {
       </div>
       <AlertaDeErro erro={erro} />
       <AlertaDeConfirmacao mensagem={confirmacao} />
+      <AlertaDeConfirmacao mensagem={confirmacaoCadastro} />
       <Carregando open={carregando} />
     </div>
   );

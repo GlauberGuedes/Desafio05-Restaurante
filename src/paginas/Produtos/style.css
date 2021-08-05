@@ -14,15 +14,16 @@
   width: 100%;
   border-bottom-right-radius: 232px;
   position: relative;
-  justify-content: space-around;
-  padding-top: 147px;
+  padding: 147px 200px 0 350px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header-produtos h1 {
   font-family: "Baloo 2", cursive;
   color: white;
-  margin-left: -280px;
+  padding: 0;
+  margin-right: auto;
   font-size: 40px;
 }
 

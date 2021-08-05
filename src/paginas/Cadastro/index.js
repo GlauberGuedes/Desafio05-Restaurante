@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { post } from "../../servicos/requisicaoAPI";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
+import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 import DadosUsuario from "../../componentes/Steppers/usuario/DadosUsuario";
 import DadosRestaurante from "../../componentes/Steppers/restaurante/DadosRestaurante";
 import DadosEntrega from "../../componentes/Steppers/entrega/DadosEntrega";
@@ -38,6 +39,7 @@ function FormularioCadastro() {
   const [activeStep, setActiveStep] = useState(0);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [confirmacaoCadastro, setConfirmacaoCadastro] = useState("");
   const steps = getSteps();
   const { token } = useAuth();
 
@@ -55,6 +57,15 @@ function FormularioCadastro() {
       clearTimeout(timeout);
     };
   }, [erro]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setConfirmacaoCadastro("");
+    }, 4000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [confirmacaoCadastro]);
 
   async function onSubmit(data) {
     const dadosCadastro = {
@@ -84,7 +95,11 @@ function FormularioCadastro() {
         return setErro(dados);
       }
 
+      setConfirmacaoCadastro("Usuário e Restaurante cadastrados com sucesso!");
+      setCarregando(true);
+
       history.push("/");
+      setCarregando(false);
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -161,6 +176,7 @@ function FormularioCadastro() {
         </form>
       <AlertaDeErro erro={erro} />
       <Carregando open={carregando} />
+      <AlertaDeConfirmacao message={confirmacaoCadastro} />
     </FormProvider>
   );
 }

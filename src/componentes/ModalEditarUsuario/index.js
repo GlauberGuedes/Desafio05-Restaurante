@@ -10,10 +10,10 @@ import Carregando from "../Carregando";
 import AlertaDeErro from "../AlertaDeErro";
 import InputImagem from "../InputImagem";
 import useAuth from "../../hooks/useAuth";
-import logo from "../../assets/pizzaria.png";
 import { get, putUsuario } from "../../servicos/requisicaoAPI";
+import logo from "../../assets/LogoRestaurante.png";
 
-export default function ModalEditarUsuario() {
+export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
   const classes = useStyles();
   const { setToken, token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
   const [open, setOpen] = useState(false);
@@ -43,6 +43,8 @@ export default function ModalEditarUsuario() {
       clearTimeout(timeout);
     };
   }, [erro]);
+
+ 
 
   function abrirModal() {
     setOpen(true);
@@ -113,13 +115,23 @@ export default function ModalEditarUsuario() {
       );
         
       setCarregando(false);
+      if (senha) {
+        if (senha !== confirmaSenha) {
+          setErro("Senha e Repita a senha devem ser iguais!");
+          return;
+        }
+      }
+      
       if (erro) {
         setCarregando(false);
         return setErro(dados);
       }
-      await dadosUsuario();
-      setOpen(false);
       
+      await dadosUsuario();
+      setConfirmacaoCadastro("Alterações realizadas com sucesso!");
+
+      setCarregando(false);
+      setOpen(false);
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -147,7 +159,7 @@ export default function ModalEditarUsuario() {
 
   return (
     <div className={classes.container}>
-      <img className={classes.logo} src={restaurante.imagem} alt="logo restaurante" onClick={abrirModal} />
+      <img className={classes.logo} src={restaurante.imagem ? restaurante.imagem : logo} alt="logo restaurante" onClick={abrirModal} />
       <Dialog
         open={open}
         onClose={fecharModal}

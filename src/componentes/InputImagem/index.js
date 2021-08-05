@@ -39,7 +39,7 @@ export default function InputImagem({ imagem, setBase64Imagem }) {
 
   return (
     <div className={classes.containerImagem}>
-      {imagem ? (
+      {imagemAtualizada ? (
         <div
           style={{
             backgroundImage: `linear-gradient(177.64deg, rgba(18, 18, 18, 0.2) 1.98%, rgba(18, 18, 18, 0.8) 98.3%), url(${imagemAtualizada})`,

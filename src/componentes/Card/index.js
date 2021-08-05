@@ -1,5 +1,4 @@
 import "./style.css";
-import pizza from "../../assets/pizza.png";
 import ModalEditarProduto from "../../componentes/ModalEditarProduto";
 import ModalDelete from "../../componentes/ModalDelete";
 import Carregando from "../../componentes/Carregando";

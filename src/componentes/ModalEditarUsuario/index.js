@@ -112,17 +112,33 @@ export default function ModalEditarUsuario() {
         token
       );
         
+      setCarregando(false);
       if (erro) {
         setCarregando(false);
         return setErro(dados);
       }
+      await dadosUsuario();
+      setOpen(false);
+      
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
+  }
 
+  async function dadosUsuario () {
+    setErro("");
+    setCarregando(true);
+    try {
+      const { dados, erro } = await get('usuarios', token);
+
+      setCarregando(false);
+      if (erro) {
+        return setErro(dados);
+      }
 
       setRestaurante(dados.restaurante);
       setUsuario(dados.usuario);
-      setCarregando(false);
-      setOpen(false);
-      
     } catch (error) {
       setCarregando(false);
       setErro(error.message);

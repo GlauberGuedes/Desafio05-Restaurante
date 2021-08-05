@@ -11,7 +11,7 @@ import AlertaDeErro from "../AlertaDeErro";
 import InputImagem from "../InputImagem";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/pizzaria.png";
-import { get } from "../../servicos/requisicaoAPI";
+import { get, putUsuario } from "../../servicos/requisicaoAPI";
 
 export default function ModalEditarUsuario({
   categoriaRestaurante,
@@ -36,6 +36,8 @@ export default function ModalEditarUsuario({
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
 
+  const [base64Imagem, setBase64Imagem] = useState("");
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setErro("");
@@ -59,6 +61,7 @@ export default function ModalEditarUsuario({
     setEntrega(restaurante.taxa_entrega);
     setTempo(restaurante.tempo_entrega_minutos);
     setValorMinimo(restaurante.valor_minimo_pedido);
+    setBase64Imagem(restaurante.imagem);
     setSenha("");
     setConfirmaSenha("");
   }
@@ -85,10 +88,49 @@ export default function ModalEditarUsuario({
     }
   }
   
+  async function onSubmit(e) {
+    e.preventDefault();
+    setErro("");
+    setCarregando(true);
+
+    const dadosCadastro = {
+      nome: nome,
+      email: email,
+      senha: senha,
+      restaurante: {
+        nome: nomeUsuarioRestaurante,
+        idCategoria: categoria,
+        descricao: descricao,
+        taxaEntrega: entrega,
+        tempoEntregaEmMinutos: tempo,
+        valorMinimoPedido: valorMinimo,
+        imagem: base64Imagem
+      },
+    };
+
+
+    try {
+      const { dados, erro } = await putUsuario(
+        'usuarios',
+        dadosCadastro,
+        token
+      );
+        console.log(dadosCadastro);
+      if (erro) {
+        setCarregando(false);
+        return setErro(dados);
+      }
+      setCarregando(false);
+      setOpen(false);
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
+  }
 
   return (
     <div className={classes.container}>
-      <img className={classes.logo} src={logo} alt="logo restaurante" onClick={abrirModal} />
+      <img className={classes.logo} src={base64Imagem} alt="logo restaurante" onClick={abrirModal} />
       <Dialog
         open={open}
         onClose={fecharModal}
@@ -96,7 +138,7 @@ export default function ModalEditarUsuario({
         maxWidth={false}
         scroll="body"
       >
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <Typography variant="h1" className={classes.tituloUsuario}>
             Editar perfil
           </Typography>
@@ -112,7 +154,6 @@ export default function ModalEditarUsuario({
                   className={classes.input}
                   type="text"
                   id="nome"
-                  placeholder={usuario.nome}
                 />
               </div>
               <div className={classes.divInput}>
@@ -125,7 +166,6 @@ export default function ModalEditarUsuario({
                   className={classes.input}
                   type="text"
                   id="email"
-                  placeholder={usuario.email}
                 />
               </div>
               <div className={classes.divInput}>
@@ -138,7 +178,6 @@ export default function ModalEditarUsuario({
                   className={classes.input}
                   type="text"
                   id="nome_restaurante"
-                  
                 />
               </div>
               <div className={classes.divInput}>
@@ -252,7 +291,7 @@ export default function ModalEditarUsuario({
               </div>
             </div>
             <div className={classes.imagemPerfil}>
-              <InputImagem imagem={imagemUsuario} />
+              <InputImagem imagem={imagemUsuario} setBase64Imagem={setBase64Imagem}/>
             </div>
           </DialogContent>
           <DialogActions className={classes.botoes}>

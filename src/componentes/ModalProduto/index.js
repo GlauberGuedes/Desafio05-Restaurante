@@ -18,6 +18,7 @@ export default function Modal({ listaDeProdutos }) {
   const [permiteObservacoes, setPermiteObservacoes] = useState(true);
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [base64Imagem, setBase64Imagem] = useState("");
   const [preco, setPreco] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
@@ -42,6 +43,7 @@ export default function Modal({ listaDeProdutos }) {
     setNome("");
     setDescricao("");
     setPreco("");
+    setBase64Imagem("");
     setProdutoAtivo(true);
     setPermiteObservacoes(true);
   }
@@ -55,6 +57,7 @@ export default function Modal({ listaDeProdutos }) {
       nome: nome,
       descricao: descricao,
       preco: preco,
+      imagem: base64Imagem,
       permiteObservacoes,
       ativo: produtoAtivo,
     };
@@ -145,7 +148,7 @@ export default function Modal({ listaDeProdutos }) {
                 ativo={permiteObservacoes}
               />
             </div>
-            <InputImagem />
+            <InputImagem setBase64Imagem={setBase64Imagem}/>
           </DialogContent>
           <DialogActions className={classes.botoes}>
             <button

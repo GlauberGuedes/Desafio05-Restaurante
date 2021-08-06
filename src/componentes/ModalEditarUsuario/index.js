@@ -255,6 +255,7 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
                   className={classes.input}
                   type="number"
                   id="taxa_entrega"
+                  placeholder="Insira um valor em centavos"
                 />
               </div>
               <div className={classes.divInput}>
@@ -267,6 +268,7 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
                   className={classes.input}
                   type="number"
                   id="tempo_entrega"
+                  placeholder="Insira um tempo em minutos"
                 />
               </div>
               <div className={classes.divInput}>
@@ -279,7 +281,7 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
                   className={classes.input}
                   type="number"
                   id="valor_minimo"
-                  placeholder="R$ 00,00"
+                  placeholder="Insira um valor em centavos"
                 />
               </div>
               <div className={classes.divInput}>

@@ -156,14 +156,23 @@ function FormularioCadastro() {
               </button>
               <button
                 className="botao-ativado botao-cadastro"
-                type={activeStep === steps.length - 1 ? "submit" : "button"}
+                type={
+                  activeStep === steps.length - 1 
+                  ? 
+                  "submit" 
+                  : "button"
+                }
                 onClick={
-                  activeStep === steps.length - 1
+                    activeStep === steps.length - 1
                     ? onsubmit
                     : methods.handleSubmit(handleNext)
                 }
               >
-                {activeStep === steps.length - 1 ? "Criar conta" : "Próximo"}
+                {
+                  activeStep === steps.length - 1 
+                  ? "Criar conta" 
+                  : "Próximo"
+                }
               </button>
             </div>
             <div className="links">

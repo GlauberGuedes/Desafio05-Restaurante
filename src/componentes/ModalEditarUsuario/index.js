@@ -15,7 +15,7 @@ import logo from "../../assets/LogoRestaurante.png";
 
 export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
   const classes = useStyles();
-  const { setToken, token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
+  const { token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState(usuario.nome);
   const [email, setEmail] = useState(usuario.email);

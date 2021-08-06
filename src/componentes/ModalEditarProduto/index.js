@@ -168,7 +168,7 @@ export default function ModalEditar({
                   className={classes.inputNumber}
                   type="number"
                   id="valor"
-                  placeholder="Insira um valor em centavos"
+                  placeholder="valor em centavos"
                 />
               </div>
               <Switches

@@ -13,7 +13,7 @@ export default function InputImagem({ imagem, setBase64Imagem }) {
     let base = base64.replace("data:image/png;base64,", "");
     base = base.replace("data:image/jpeg;base64,", "");
     base = base.replace("data:image/jpg;base64,", "");
-    console.log(base64);
+
     setBase64Imagem(base);
     
     const reader = new FileReader();

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   containerImagem: {
     width: 384,
-    heigth: 384,
+    maxHeight: 384,
     marginBottom: 50,
     display: "flex",
     flexDirection: "column",
@@ -19,6 +19,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 16,
     width: "100%",
     height: "100%",
+  },
+  imagemAtualizada: {
+    borderRadius: 16,
+    width: "100%",
+    height: "100%",
+    zIndex: 4,
+    position: "absolute",
   },
   labelImagem: {
     textAlign: "center",

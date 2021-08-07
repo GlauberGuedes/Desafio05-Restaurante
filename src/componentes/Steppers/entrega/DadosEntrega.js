@@ -17,6 +17,7 @@ function DadosEntrega() {
             id="taxa_entrega"
             className="input-cadastro"
             type="number"
+            placeholder="Insira um valor em centavos"
             {...register("taxaEntrega")}
           />
           <label className="label-cadastro" htmlFor="tempo_entrega_minutos">
@@ -26,6 +27,7 @@ function DadosEntrega() {
             id="tempo_entrega_minutos"
             type="number"
             className="input-cadastro"
+            placeholder="Insira um tempo em minutos"
             {...register("tempoEntregaEmMinutos")}
           />
           <label className="label-cadastro" htmlFor="valor_minimo_pedido">
@@ -35,7 +37,7 @@ function DadosEntrega() {
             id="valor_minimo_pedido"
             type="number"
             className="input-cadastro"
-            placeholder="R$ 00,00"
+            placeholder="Insira um valor em centavos"
             {...register("valorMinimoPedido")}
           />
         </div>

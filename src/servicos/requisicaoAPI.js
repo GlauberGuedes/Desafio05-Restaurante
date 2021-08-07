@@ -74,6 +74,30 @@ export async function putProduto(endPoint, data, token) {
   }
 }
 
+export async function putUsuario(endPoint, data, token) {
+  const headers = {
+    "Content-type": "application/json",
+  };
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  try {
+    const resposta = await fetch(baseURL + endPoint, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers,
+    });
+
+    const dados = await resposta.json();
+
+    return { dados, erro: !resposta.ok };
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function get(endPoint, token) {
   const headers = {
     "Content-type": "application/json",

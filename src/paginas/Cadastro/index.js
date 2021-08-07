@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { post } from "../../servicos/requisicaoAPI";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
+import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 import DadosUsuario from "../../componentes/Steppers/usuario/DadosUsuario";
 import DadosRestaurante from "../../componentes/Steppers/restaurante/DadosRestaurante";
 import DadosEntrega from "../../componentes/Steppers/entrega/DadosEntrega";
@@ -38,6 +39,7 @@ function FormularioCadastro() {
   const [activeStep, setActiveStep] = useState(0);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [confirmacaoCadastro, setConfirmacaoCadastro] = useState("");
   const steps = getSteps();
   const { token } = useAuth();
 
@@ -46,6 +48,24 @@ function FormularioCadastro() {
       history.push("/produtos");
     }
   }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setConfirmacaoCadastro("");
+    }, 4000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [confirmacaoCadastro]);
 
   async function onSubmit(data) {
     const dadosCadastro = {
@@ -75,7 +95,11 @@ function FormularioCadastro() {
         return setErro(dados);
       }
 
+      setConfirmacaoCadastro("Usuário e Restaurante cadastrados com sucesso!");
+      setCarregando(true);
+
       history.push("/");
+      setCarregando(false);
     } catch (error) {
       setCarregando(false);
       setErro(error.message);
@@ -132,14 +156,23 @@ function FormularioCadastro() {
               </button>
               <button
                 className="botao-ativado botao-cadastro"
-                type={activeStep === steps.length - 1 ? "submit" : "button"}
+                type={
+                  activeStep === steps.length - 1 
+                  ? 
+                  "submit" 
+                  : "button"
+                }
                 onClick={
-                  activeStep === steps.length - 1
+                    activeStep === steps.length - 1
                     ? onsubmit
                     : methods.handleSubmit(handleNext)
                 }
               >
-                {activeStep === steps.length - 1 ? "Criar conta" : "Próximo"}
+                {
+                  activeStep === steps.length - 1 
+                  ? "Criar conta" 
+                  : "Próximo"
+                }
               </button>
             </div>
             <div className="links">
@@ -152,6 +185,7 @@ function FormularioCadastro() {
         </form>
       <AlertaDeErro erro={erro} />
       <Carregando open={carregando} />
+      <AlertaDeConfirmacao message={confirmacaoCadastro} />
     </FormProvider>
   );
 }

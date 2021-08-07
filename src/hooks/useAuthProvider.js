@@ -6,16 +6,21 @@ export default function useAuthProvider() {
   const [token, setToken] = useState(value);
   const [valueRestaurante, setValueRestaurante] = useLocalStorage("RESTAURANTE", "");
   const [restaurante, setRestaurante] = useState(valueRestaurante);
+  const [valueUsuario, setValueUsuario] = useLocalStorage("USUARIO", "");
+  const [usuario, setUsuario] = useState(valueUsuario);
 
   useEffect(() => {
     setValue(token);
     setValueRestaurante(restaurante);
-  }, [token, restaurante]);
+    setValueUsuario(usuario)
+  }, [token, restaurante, usuario]);
 
   return {
     token,
     setToken,
     restaurante,
-    setRestaurante
+    setRestaurante,
+    usuario,
+    setUsuario
   };
 }

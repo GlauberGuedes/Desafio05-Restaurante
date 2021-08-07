@@ -9,39 +9,21 @@
 }
 
 .header-produtos {
-  background: linear-gradient(
-      205.02deg,
-      rgba(18, 18, 18, 0.2) 36.52%,
-      rgba(18, 18, 18, 0.8) 77.14%
-    ),
-    url("../../assets/bg-pizzaria.png");
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   height: 245px;
   width: 100%;
   border-bottom-right-radius: 232px;
   position: relative;
-  justify-content: space-around;
-  padding-top: 147px;
+  padding: 147px 200px 0 350px;
   align-items: center;
-}
-
-.logo {
-  width: 176px;
-  height: 176px;
-  border-radius: 50%;
-  position: absolute;
-  top: 157px;
-  left: 112px;
-  border: 6px solid #ffffff;
-  z-index: 3;
+  justify-content: space-between;
 }
 
 .header-produtos h1 {
   font-family: "Baloo 2", cursive;
   color: white;
-  margin-left: 120px;
+  padding: 0;
+  margin-right: auto;
   font-size: 40px;
 }
 

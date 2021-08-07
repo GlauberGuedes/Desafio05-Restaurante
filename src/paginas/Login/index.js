@@ -15,7 +15,7 @@ export default function Login() {
   const history = useHistory();
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const { setToken, token, setRestaurante } = useAuth();
+  const { setToken, token, setRestaurante, setUsuario } = useAuth();
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
@@ -23,6 +23,15 @@ export default function Login() {
       history.push("/produtos");
     }
   }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
 
   async function onSubmit(data) {
     setErro("");
@@ -41,6 +50,8 @@ export default function Login() {
 
       setRestaurante(dados.restaurante);
       setToken(dados.token);
+      setUsuario(dados.usuario);
+
       history.push("/produtos");
     } catch (error) {
       setCarregando(false);

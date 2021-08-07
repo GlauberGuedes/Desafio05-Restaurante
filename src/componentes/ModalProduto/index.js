@@ -3,7 +3,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Switches from "../Switch";
 import Carregando from "../Carregando";
 import AlertaDeErro from "../AlertaDeErro";
@@ -18,10 +18,20 @@ export default function Modal({ listaDeProdutos }) {
   const [permiteObservacoes, setPermiteObservacoes] = useState(true);
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [base64Imagem, setBase64Imagem] = useState("");
   const [preco, setPreco] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const { token } = useAuth();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
 
   function abrirModal() {
     setOpen(true);
@@ -33,6 +43,7 @@ export default function Modal({ listaDeProdutos }) {
     setNome("");
     setDescricao("");
     setPreco("");
+    setBase64Imagem("");
     setProdutoAtivo(true);
     setPermiteObservacoes(true);
   }
@@ -46,10 +57,11 @@ export default function Modal({ listaDeProdutos }) {
       nome: nome,
       descricao: descricao,
       preco: preco,
+      imagem: base64Imagem,
       permiteObservacoes,
       ativo: produtoAtivo,
     };
-
+    
     try {
       const { dados, erro } = await postProduto("produtos", data, token);
 
@@ -59,7 +71,7 @@ export default function Modal({ listaDeProdutos }) {
         return setErro(dados);
       }
 
-      listaDeProdutos();
+      await listaDeProdutos();
       fecharModal();
       setOpen(false);
     } catch (error) {
@@ -123,6 +135,7 @@ export default function Modal({ listaDeProdutos }) {
                   className={classes.inputNumber}
                   type="number"
                   id="valor"
+                  placeholder="valor em centavos"
                 />
               </div>
               <Switches
@@ -136,7 +149,7 @@ export default function Modal({ listaDeProdutos }) {
                 ativo={permiteObservacoes}
               />
             </div>
-            <InputImagem />
+            <InputImagem setBase64Imagem={setBase64Imagem}/>
           </DialogContent>
           <DialogActions className={classes.botoes}>
             <button

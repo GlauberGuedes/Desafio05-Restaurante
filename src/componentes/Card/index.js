@@ -1,10 +1,9 @@
 import "./style.css";
-import pizza from "../../assets/pizza.png";
 import ModalEditarProduto from "../../componentes/ModalEditarProduto";
 import ModalDelete from "../../componentes/ModalDelete";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Card({
   nome,
@@ -14,10 +13,20 @@ export default function Card({
   id,
   produtoAtivado,
   observacoesAtivada,
-  setErro,
-  erro,
+  imagem,
+  setConfirmacao,
 }) {
   const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
 
   return (
     <div className="container-card">
@@ -32,7 +41,7 @@ export default function Card({
             })}
           </span>
         </div>
-        <img src={pizza} alt="imagem do produto" />
+        {imagem && <img src={imagem} alt="imagem do produto" />}
       </div>
       <div className="botoes-card">
         <ModalDelete
@@ -40,6 +49,7 @@ export default function Card({
           setCarregando={setCarregando}
           id={id}
           listaDeProdutos={listaDeProdutos}
+          setConfirmacao={setConfirmacao}
         />
         <ModalEditarProduto
           id={id}
@@ -48,7 +58,7 @@ export default function Card({
           nomeProduto={nome}
           descricaoProduto={descricao}
           precoProduto={preco}
-          imagem={pizza}
+          imagem={imagem}
           listaDeProdutos={listaDeProdutos}
         />
       </div>

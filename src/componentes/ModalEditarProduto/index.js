@@ -3,7 +3,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Switches from "../Switch";
 import Carregando from "../Carregando";
 import AlertaDeErro from "../AlertaDeErro";
@@ -35,7 +35,17 @@ export default function ModalEditar({
   const [preco, setPreco] = useState(precoProduto);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [base64Imagem, setBase64Imagem] = useState("");
   const { token } = useAuth();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErro("");
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [erro]);
 
   function abrirModal() {
     setOpen(true);
@@ -61,6 +71,7 @@ export default function ModalEditar({
         descricao: descricao,
         preco: preco,
         permiteObservacoes,
+        imagem: base64Imagem
       },
       ativo: produtoAtivo,
     };
@@ -93,8 +104,8 @@ export default function ModalEditar({
         }
       }
 
+      await listaDeProdutos();
       setCarregando(false);
-      listaDeProdutos();
       setOpen(false);
     } catch (error) {
       setCarregando(false);
@@ -157,6 +168,7 @@ export default function ModalEditar({
                   className={classes.inputNumber}
                   type="number"
                   id="valor"
+                  placeholder="valor em centavos"
                 />
               </div>
               <Switches
@@ -170,7 +182,7 @@ export default function ModalEditar({
                 ativo={permiteObservacoes}
               />
             </div>
-            <InputImagem imagem={imagem} />
+            <InputImagem imagem={imagem} setBase64Imagem={setBase64Imagem} />
           </DialogContent>
           <DialogActions className={classes.botoes}>
             <button

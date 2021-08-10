@@ -9,14 +9,15 @@ import { useState, useEffect } from "react";
 import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
 import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
-
 import ModalEditarUsuario from "../../componentes/ModalEditarUsuario";
 
 export default function Produtos() {
-  const { setToken, token, setRestaurante, restaurante, setUsuario } = useAuth();
+  const { setToken, token } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const history = useHistory();
   const [erro, setErro] = useState("");
+  const [restaurante, setRestaurante] = useState("");
+  const [usuario, setUsuario] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [confirmacao, setConfirmacao] = useState("");
   const [confirmacaoCadastro, setConfirmacaoCadastro] = useState("");
@@ -48,6 +49,25 @@ export default function Produtos() {
     };
   }, [confirmacaoCadastro]);
 
+  async function dadosUsuario () {
+    setErro("");
+    setCarregando(true);
+    try {
+      const { dados, erro } = await get('usuarios', token);
+
+      setCarregando(false);
+      if (erro) {
+        return setErro(dados);
+      }
+
+      setRestaurante(dados.restaurante);
+      setUsuario(dados.usuario);
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
+  }
+
   async function listaDeProdutos() {
     setCarregando(true);
     setErro("");
@@ -69,12 +89,11 @@ export default function Produtos() {
 
   useEffect(() => {
     listaDeProdutos();
+    dadosUsuario();
   }, []);
 
   function logout() {
     setToken("");
-    setRestaurante("");
-    setUsuario("");
     history.push("/");
   }
 
@@ -95,6 +114,11 @@ export default function Produtos() {
       >
         <ModalEditarUsuario
           setConfirmacaoCadastro={setConfirmacaoCadastro}
+          usuario={usuario}
+          restaurante={restaurante}
+          setRestaurante={setRestaurante}
+          setUsuario={setUsuario}
+          dadosUsuario={dadosUsuario}
         />
         <h1>{restaurante.nome}</h1>
         <button onClick={logout}>Logout</button>

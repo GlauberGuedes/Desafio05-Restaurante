@@ -13,19 +13,19 @@ import useAuth from "../../hooks/useAuth";
 import { get, putUsuario } from "../../servicos/requisicaoAPI";
 import logo from "../../assets/LogoRestaurante.png";
 
-export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
+export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, setUsuario, restaurante, setRestaurante, dadosUsuario}) {
   const classes = useStyles();
-  const { token, restaurante, setRestaurante, usuario, setUsuario } = useAuth();
+  const { token } = useAuth();
   const [open, setOpen] = useState(false);
-  const [nome, setNome] = useState(usuario.nome);
-  const [email, setEmail] = useState(usuario.email);
-  const [nomeUsuarioRestaurante, setNomeUsuarioRestaurante] = useState(restaurante.nome);
-  const [categoria, setCategoria] = useState(restaurante.categoria_id);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [nomeUsuarioRestaurante, setNomeUsuarioRestaurante] = useState("");
+  const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState([]);
-  const [descricao, setDescricao] = useState(restaurante.descricao);
-  const [entrega, setEntrega] = useState(restaurante.taxa_entrega);
-  const [tempo, setTempo] = useState(restaurante.tempo_entrega_minutos);
-  const [valorMinimo, setValorMinimo] = useState(restaurante.valor_minimo_pedido);
+  const [descricao, setDescricao] = useState("");
+  const [entrega, setEntrega] = useState("");
+  const [tempo, setTempo] = useState("");
+  const [valorMinimo, setValorMinimo] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setConfirmaSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -44,10 +44,19 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
     };
   }, [erro]);
 
- 
-
   function abrirModal() {
     setOpen(true);
+    setNome(usuario.nome);
+    setEmail(usuario.email);
+    setNomeUsuarioRestaurante(restaurante.nome);
+    setCategoria(restaurante.categoria_id);
+    setDescricao(restaurante.descricao);
+    setEntrega(restaurante.taxa_entrega);
+    setTempo(restaurante.tempo_entrega_minutos);
+    setValorMinimo(restaurante.valor_minimo_pedido);
+    setBase64Imagem("");
+    setSenha("");
+    setConfirmaSenha("");
   }
 
   function fecharModal() {
@@ -132,25 +141,6 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro}) {
 
       setCarregando(false);
       setOpen(false);
-    } catch (error) {
-      setCarregando(false);
-      setErro(error.message);
-    }
-  }
-
-  async function dadosUsuario () {
-    setErro("");
-    setCarregando(true);
-    try {
-      const { dados, erro } = await get('usuarios', token);
-
-      setCarregando(false);
-      if (erro) {
-        return setErro(dados);
-      }
-
-      setRestaurante(dados.restaurante);
-      setUsuario(dados.usuario);
     } catch (error) {
       setCarregando(false);
       setErro(error.message);

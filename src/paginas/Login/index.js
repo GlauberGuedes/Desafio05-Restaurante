@@ -15,7 +15,7 @@ export default function Login() {
   const history = useHistory();
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const { setToken, token, setRestaurante, setUsuario } = useAuth();
+  const { setToken, token } = useAuth();
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
@@ -48,9 +48,7 @@ export default function Login() {
         return setErro(dados);
       }
 
-      setRestaurante(dados.restaurante);
       setToken(dados.token);
-      setUsuario(dados.usuario);
 
       history.push("/produtos");
     } catch (error) {

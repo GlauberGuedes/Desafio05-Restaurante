@@ -141,6 +141,8 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, set
 
       setCarregando(false);
       setOpen(false);
+      setSenha("");
+      setConfirmaSenha("");
     } catch (error) {
       setCarregando(false);
       setErro(error.message);

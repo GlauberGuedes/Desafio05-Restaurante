@@ -132,7 +132,7 @@ export default function Produtos() {
           </p>
         )}
         <div className={produtos.length === 0 ? "" : "botao-modal"}>
-          <ModalProduto listaDeProdutos={listaDeProdutos} />
+          <ModalProduto listaDeProdutos={listaDeProdutos} setConfirmacao={setConfirmacao}/>
         </div>
         <div className="container-cards">
           {produtos.map((produto) => (

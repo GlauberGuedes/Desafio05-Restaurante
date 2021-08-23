@@ -11,7 +11,7 @@ import InputImagem from "../InputImagem";
 import { postProduto } from "../../servicos/requisicaoAPI";
 import useAuth from "../../hooks/useAuth";
 
-export default function Modal({ listaDeProdutos }) {
+export default function Modal({ listaDeProdutos, setConfirmacao }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [produtoAtivo, setProdutoAtivo] = useState(true);
@@ -72,6 +72,7 @@ export default function Modal({ listaDeProdutos }) {
       }
 
       await listaDeProdutos();
+      setConfirmacao("Produto adicionado com sucesso.");
       fecharModal();
       setOpen(false);
     } catch (error) {

@@ -10,6 +10,7 @@ import Carregando from "../../componentes/Carregando";
 import AlertaDeErro from "../../componentes/AlertaDeErro";
 import AlertaDeConfirmacao from "../../componentes/AlertaDeConfirmacao";
 import ModalEditarUsuario from "../../componentes/ModalEditarUsuario";
+import ModalDetalhePedido from "../../componentes/ModalDetalhePedido";
 
 export default function Produtos() {
   const { setToken, token } = useAuth();

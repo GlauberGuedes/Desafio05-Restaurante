@@ -1,16 +1,78 @@
 import "./style.css";
+import { useEffect, useState } from "react";
 
-export default function ListaPedidos() {
-  return(
+export default function ListaPedidos({
+  id,
+  produtos,
+  endereco,
+  complemento,
+  cep,
+  nome,
+  total,
+}) {
+  const [enderecoConsumidor, setEnderecoConsumidor] = useState("");
+  const [verMais, setVerMais] = useState(false);
+  const [verMaisEndereco, setVerMaisEndereco] = useState(false);
+
+  useEffect(() => {
+    if (complemento) {
+      const enderecoConsumidor = endereco + ", " + complemento + ", " + cep;
+      return setEnderecoConsumidor(enderecoConsumidor);
+    }
+
+    const enderecoConsumidor = endereco + ", " + cep;
+    setEnderecoConsumidor(enderecoConsumidor);
+  }, []);
+
+  return (
     <div className="conteudo-lista-pedidos">
-      <p className="bold">0001</p>
+      <p className="bold">{id}</p>
       <div className="produtos-pedido">
-        <p>Pizza Marguerita Grande - 1 uni</p>
-        <p>Pizza Portuguesa Média - 1uni</p>
+        {produtos.length < 3
+          ? produtos.map((produto) => (
+              <p>
+                {produto.nomeProduto} - {produto.quantidade} uni
+              </p>
+            ))
+          : produtos
+              .filter((produto, indice) => {
+                if (verMais) {
+                  return produto;
+                } else {
+                  return indice < 2;
+                }
+              })
+              .map((produto) => (
+                <p>
+                  {produto.nomeProduto} - {produto.quantidade} uni
+                </p>
+              ))}
+        {produtos.length > 2 && (
+          <button onClick={() => setVerMais(!verMais)} className={"ver-mais"}>
+            {verMais ? "ver menos" : "ver mais"}
+          </button>
+        )}
       </div>
-      <p>Av. Tancredo Neves, 2227, ed. Salvador Prime, sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021</p>
-      <p>Cláudia Lemos</p>
-      <p className="bold">R$ 199,98</p>
+      <p>
+        {!verMaisEndereco && enderecoConsumidor.length > 60
+          ? enderecoConsumidor.slice(0, 60) + "..."
+          : enderecoConsumidor}
+        <button
+          onClick={() => setVerMaisEndereco(!verMaisEndereco)}
+          className={
+            enderecoConsumidor.length < 60 ? "ver-mais-desativado" : "ver-mais"
+          }
+        >
+          {verMaisEndereco ? "ver menos" : "ver mais"}
+        </button>
+      </p>
+      <p>{nome}</p>
+      <p className="bold">
+        {Number(total / 100).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </p>
     </div>
   );
 }

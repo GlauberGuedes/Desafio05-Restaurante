@@ -19,7 +19,8 @@ export default function Pedidos() {
   const [carregando, setCarregando] = useState(false);
   const [confirmacao, setConfirmacao] = useState("");
   const [entregue, setEntregue] = useState(false);
-  const [pedidos, setPedidos] = useState(["1", "2", "3"]);
+  const [pedidos, setPedidos] = useState([]);
+  const [pedidosFiltrados, setPedidosFiltrados] = useState([]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -58,9 +59,39 @@ export default function Pedidos() {
     }
   }
 
+  async function dadosPedido() {
+    setErro("");
+    setCarregando(true);
+    try {
+      const { dados, erro } = await get("pedidos", token);
+
+      setCarregando(false);
+      if (erro) {
+        return setErro(dados);
+      }
+
+      setPedidos(dados);
+    } catch (error) {
+      setCarregando(false);
+      setErro(error.message);
+    }
+  }
+
   useEffect(() => {
     dadosUsuario();
+    dadosPedido();
   }, []);
+
+  useEffect(() => {
+    if (entregue) {
+      const todosPedidos = [...pedidos];
+      const filtroPedidos = todosPedidos.filter((pedido) => pedido.entregue);
+      return setPedidosFiltrados(filtroPedidos);
+    }
+
+    const filtroPedidos = pedidos.filter((pedido) => !pedido.saiuParaEntrega);
+    setPedidosFiltrados(filtroPedidos);
+  }, [entregue, pedidos]);
 
   function logout() {
     setToken("");
@@ -125,13 +156,22 @@ export default function Pedidos() {
         <div className="pedidos">
           <div className="titulo-pedidos">
             <h5>Pedido</h5>
-            <h5>Items</h5>
+            <h5>Itens</h5>
             <h5>Endereço</h5>
             <h5>Cliente</h5>
             <h5>Total</h5>
           </div>
-          {pedidos.map((pedido) => (
-            <ListaPedidos key={pedido}/>
+          {pedidosFiltrados.map((pedido) => (
+            <ListaPedidos
+              key={pedido.idPedido}
+              id={pedido.idPedido}
+              produtos={pedido.itensPedido}
+              endereco={pedido.endereco}
+              complemento={pedido.complemento}
+              cep={pedido.cep}
+              nome={pedido.nomeConsumidor}
+              total={pedido.valorTotal}
+            />
           ))}
         </div>
       </div>

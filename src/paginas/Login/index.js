@@ -20,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     if (token) {
-      history.push("/produtos");
+      history.push("/pedidos");
     }
   }, []);
 
@@ -50,7 +50,7 @@ export default function Login() {
 
       setToken(dados.token);
 
-      history.push("/produtos");
+      history.push("/pedidos");
     } catch (error) {
       setCarregando(false);
       return setErro(error.message);

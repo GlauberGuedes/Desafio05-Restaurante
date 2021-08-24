@@ -10,6 +10,7 @@ import Login from "./paginas/Login";
 import FormularioCadastro from "./paginas/Cadastro";
 import "./styles/global.css";
 import Produtos from "./paginas/Produtos";
+import Pedidos from "./paginas/Pedidos";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/" exact component={Login} />
             <Route path="/cadastro" component={FormularioCadastro} />
             <RotasProtegidas>
+              <Route path="/pedidos" component={Pedidos} />
               <Route path="/produtos" component={Produtos} />
             </RotasProtegidas>
           </Switch>

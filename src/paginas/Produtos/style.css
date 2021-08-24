@@ -14,9 +14,23 @@
   width: 100%;
   border-bottom-right-radius: 232px;
   position: relative;
-  padding: 147px 200px 0 350px;
+  padding: 107px 200px 0 350px;
   align-items: center;
   justify-content: space-between;
+}
+
+.titulo-restaurante {
+  z-index: 3;
+  margin-right: auto;
+}
+
+.header-produtos .botao-link {
+  background: #FFFFFF;
+  border-radius: 20px;
+  color: #D13201;
+  font-weight: 600;
+  padding: 6.5px 26px;
+  margin: 0;
 }
 
 .header-produtos h1 {
@@ -31,6 +45,7 @@
   all: unset;
   color: white;
   cursor: pointer;
+  z-index: 3;
 }
 
 .conteudo-pagina {

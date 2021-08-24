@@ -13,7 +13,7 @@ import useAuth from "../../hooks/useAuth";
 import { get, putUsuario } from "../../servicos/requisicaoAPI";
 import logo from "../../assets/LogoRestaurante.png";
 
-export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, setUsuario, restaurante, setRestaurante, dadosUsuario}) {
+export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, restaurante, dadosUsuario}) {
   const classes = useStyles();
   const { token } = useAuth();
   const [open, setOpen] = useState(false);

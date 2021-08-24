@@ -45,7 +45,7 @@ function FormularioCadastro() {
 
   useEffect(() => {
     if (token) {
-      history.push("/produtos");
+      history.push("/pedidos");
     }
   }, []);
 

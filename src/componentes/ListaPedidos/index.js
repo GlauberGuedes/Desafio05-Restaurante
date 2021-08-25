@@ -1,5 +1,6 @@
 import "./style.css";
 import { useEffect, useState } from "react";
+import ModalDetalhePedido from "../ModalDetalhePedido";
 
 export default function ListaPedidos({
   id,
@@ -9,6 +10,7 @@ export default function ListaPedidos({
   cep,
   nome,
   total,
+  saiuParaEntrega
 }) {
   const [enderecoConsumidor, setEnderecoConsumidor] = useState("");
   const [verMais, setVerMais] = useState(false);
@@ -26,7 +28,8 @@ export default function ListaPedidos({
 
   return (
     <div className="conteudo-lista-pedidos">
-      <p className="bold">{id}</p>
+      <div className="div-modal-pedido">
+      <p className="bold">{id}</p>    
       <div className="produtos-pedido">
         {produtos.length < 3
           ? produtos.map((produto) => (
@@ -73,6 +76,17 @@ export default function ListaPedidos({
           currency: "BRL",
         })}
       </p>
+      <ModalDetalhePedido
+          id={id}
+          pedidos={produtos}
+          endereco={endereco}
+          complemento={complemento}
+          cep={cep}
+          nome={nome}
+          total={total}
+          saiuParaEntrega={saiuParaEntrega}
+      />
+      </div>
     </div>
   );
 }

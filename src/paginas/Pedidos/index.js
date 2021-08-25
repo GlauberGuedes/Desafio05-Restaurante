@@ -171,6 +171,7 @@ export default function Pedidos() {
               cep={pedido.cep}
               nome={pedido.nomeConsumidor}
               total={pedido.valorTotal}
+              saiuParaEntrega={pedido.saiuParaEntrega}
             />
           ))}
         </div>

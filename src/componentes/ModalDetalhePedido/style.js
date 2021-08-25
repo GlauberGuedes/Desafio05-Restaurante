@@ -13,6 +13,14 @@ const useStyles = makeStyles((theme) => ({
     height: 820,
     padding: 70,
   },
+  modalPedido: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    cursor: "pointer"
+  },
   botaoFechar: {
     cursor: "pointer",
     position: "relative",
@@ -33,14 +41,23 @@ const useStyles = makeStyles((theme) => ({
   detalhesPedido: {
     fontSize: 14
   },
+  nomeUsuario: {
+    fontSize: 18,
+    fontWeight: 600,
+    marginTop: -30,
+    marginBottom: -30
+  },
+  enderecoEntrega: {
+    fontSize: 16
+  },
   enderecoLaranja: {
     color: "#D13201",
     fontWeight: 700,
     width: 89
   },
   containerInfoPedido: {
-      height: 360
-  },
+    height: 360
+},
   infoPedido: {
     display: "flex",
     maxWidth: 346,
@@ -59,19 +76,19 @@ const useStyles = makeStyles((theme) => ({
     color: "#525459"
   },
   quantidadeProduto: {
-      fontSize: 14,
-      fontWeight: 500,
-      color: "#525459"
+    fontSize: 14,
+    fontWeight: 500,
+    color: "#525459"
   },
   valorProduto: {
-      width: 80,
-      height: 20,
-      background: "linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;",
-      borderRadius: 4,
-      color: "#006335",
-      fontSize: 10,
-      paddingTop: 4,
-      paddingLeft: 15,
+    width: 80,
+    height: 20,
+    background: "linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;",
+    borderRadius: 4,
+    color: "#006335",
+    fontSize: 10,
+    paddingTop: 4,
+    paddingLeft: 17,
   },
   detalhesPedido: {
       display: "flex",

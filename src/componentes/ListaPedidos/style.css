@@ -1,4 +1,9 @@
 .conteudo-lista-pedidos {
+  position: relative;
+}
+
+.div-modal-pedido {
+  position: relative;
   display: grid;
   padding: 20px;
   gap: 20px;
@@ -26,10 +31,12 @@
   font-weight: bold;
   cursor: pointer;
   margin-left: 10px;
+  z-index: 2;
 }
 
 .produtos-pedido .ver-mais {
   margin: 0;
+  z-index: 2;
 }
 
 .ver-mais-desativado {

@@ -172,6 +172,7 @@ export default function Pedidos() {
               nome={pedido.nomeConsumidor}
               total={pedido.valorTotal}
               saiuParaEntrega={pedido.saiuParaEntrega}
+              dadosPedido={dadosPedido}
             />
           ))}
         </div>

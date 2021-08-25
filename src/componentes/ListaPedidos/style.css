@@ -31,12 +31,14 @@
   font-weight: bold;
   cursor: pointer;
   margin-left: 10px;
-  z-index: 2;
+  position: relative;
+  z-index: 3;
 }
 
 .produtos-pedido .ver-mais {
   margin: 0;
-  z-index: 2;
+  position: relative;
+  z-index: 3;
 }
 
 .ver-mais-desativado {

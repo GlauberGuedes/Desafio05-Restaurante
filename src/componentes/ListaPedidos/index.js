@@ -10,7 +10,8 @@ export default function ListaPedidos({
   cep,
   nome,
   total,
-  saiuParaEntrega
+  saiuParaEntrega,
+  dadosPedido
 }) {
   const [enderecoConsumidor, setEnderecoConsumidor] = useState("");
   const [verMais, setVerMais] = useState(false);
@@ -85,6 +86,7 @@ export default function ListaPedidos({
           nome={nome}
           total={total}
           saiuParaEntrega={saiuParaEntrega}
+          dadosPedido={dadosPedido}
       />
       </div>
     </div>

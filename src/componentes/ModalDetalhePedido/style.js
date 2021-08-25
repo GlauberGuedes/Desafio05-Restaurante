@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   conteudoDetalhesPedido: {
     display: "flex",
     flexDirection: "column",
-    gap: 48,
+    gap: 20,
     maxWidth: 625,
     height: 820,
     padding: 70,
@@ -38,14 +38,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     marginBottom: -15
   },
-  detalhesPedido: {
-    fontSize: 14
-  },
   nomeUsuario: {
     fontSize: 18,
     fontWeight: 600,
-    marginTop: -30,
-    marginBottom: -30
   },
   enderecoEntrega: {
     fontSize: 16
@@ -56,13 +51,11 @@ const useStyles = makeStyles((theme) => ({
     width: 89
   },
   containerInfoPedido: {
-    height: 360
+    marginTop: 15,
 },
   infoPedido: {
     display: "flex",
     maxWidth: 346,
-    marginTop: 10,
-    marginBottom: 28
   },
   imagemProduto: {
     width: 77,
@@ -94,7 +87,9 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      marginLeft: 24
+      marginLeft: 24,
+      fontSize: 14,
+      gap: 8,
   },
   span: {
     fontFamily: "'Montserrat', sans-serif",
@@ -126,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
   botaoEnviarPedido: {
       position: "relative",
       right: 195,
-      bottom: 40
+      bottom: 100
   },
   desativado: {
     width: 200,

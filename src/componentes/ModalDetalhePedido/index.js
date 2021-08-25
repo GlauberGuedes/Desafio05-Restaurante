@@ -16,7 +16,8 @@ export default function ModalDetalhePedido({
   cep,
   nome,
   total,
-  saiuParaEntrega
+  saiuParaEntrega,
+  dadosPedido
 }) {
   const classes = useStyles();
   const { token } = useAuth();
@@ -41,7 +42,6 @@ export default function ModalDetalhePedido({
     setCarregando(true);
 
     try {
-
       const resposta = await postAtivar(`entregas/${id}/ativar`, token);
 
       if (resposta.erro) {
@@ -50,6 +50,8 @@ export default function ModalDetalhePedido({
       }
 
       setCarregando(false);
+      await dadosPedido();
+      fecharModal();
     
     } catch (error) {
       setCarregando(false);
@@ -104,7 +106,7 @@ export default function ModalDetalhePedido({
           {itensPedido.map((item) => (
             <div className={classes.containerInfoPedido}>
               <div className={classes.infoPedido}>
-                <img src={item.imagemProduto} alt="imagem produto restaurante" className={classes.imagemProduto} />
+                {item.imagemProduto && <img src={item.imagemProduto} alt="imagem produto restaurante" className={classes.imagemProduto} />}
                 <div className={classes.detalhesPedido}>
                   <span className={classes.nomeProduto}>{item.nomeProduto}</span>
                   <div>

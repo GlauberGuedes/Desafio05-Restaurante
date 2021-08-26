@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     gap: 20,
     maxWidth: 625,
-    height: 820,
     padding: 70,
   },
   modalPedido: {
@@ -121,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
   botaoEnviarPedido: {
       position: "relative",
       right: 195,
-      bottom: 100
+      bottom: 30
   },
   desativado: {
     width: 200,

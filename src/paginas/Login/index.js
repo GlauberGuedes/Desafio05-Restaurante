@@ -80,6 +80,7 @@ export default function Login() {
         <button className="botao-login" type="submit">
           Entrar
         </button>
+        <p><Link to="/redefinir-senha">Esqueceu a senha?</Link></p>
         <p>
           Ainda não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
         </p>

@@ -173,6 +173,7 @@ export default function Pedidos() {
               total={pedido.valorTotal}
               saiuParaEntrega={pedido.saiuParaEntrega}
               dadosPedido={dadosPedido}
+              setConfirmacao={setConfirmacao}
             />
           ))}
         </div>

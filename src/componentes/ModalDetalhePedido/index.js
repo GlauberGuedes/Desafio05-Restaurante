@@ -17,7 +17,8 @@ export default function ModalDetalhePedido({
   nome,
   total,
   saiuParaEntrega,
-  dadosPedido
+  dadosPedido,
+  setConfirmacao
 }) {
   const classes = useStyles();
   const { token } = useAuth();
@@ -51,6 +52,7 @@ export default function ModalDetalhePedido({
 
       setCarregando(false);
       await dadosPedido();
+      setConfirmacao("Pedido enviado para entrega.");
       fecharModal();
     
     } catch (error) {

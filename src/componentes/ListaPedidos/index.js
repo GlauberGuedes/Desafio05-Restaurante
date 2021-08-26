@@ -11,7 +11,8 @@ export default function ListaPedidos({
   nome,
   total,
   saiuParaEntrega,
-  dadosPedido
+  dadosPedido,
+  setConfirmacao
 }) {
   const [enderecoConsumidor, setEnderecoConsumidor] = useState("");
   const [verMais, setVerMais] = useState(false);
@@ -87,6 +88,7 @@ export default function ListaPedidos({
           total={total}
           saiuParaEntrega={saiuParaEntrega}
           dadosPedido={dadosPedido}
+          setConfirmacao={setConfirmacao}
       />
       </div>
     </div>

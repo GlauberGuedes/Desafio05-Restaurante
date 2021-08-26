@@ -116,6 +116,14 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, res
       },
     };
 
+    if (senha) {
+      if (senha !== confirmaSenha) {
+        setCarregando(false);
+        setErro("Senha e Repita a senha devem ser iguais!");
+        return;
+      }
+    }
+
     try {
       const { dados, erro } = await putUsuario(
         'usuarios',
@@ -124,22 +132,14 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, res
       );
         
       setCarregando(false);
-      if (senha) {
-        if (senha !== confirmaSenha) {
-          setErro("Senha e Repita a senha devem ser iguais!");
-          return;
-        }
-      }
       
       if (erro) {
-        setCarregando(false);
         return setErro(dados);
       }
       
       await dadosUsuario();
       setConfirmacaoCadastro("Alterações realizadas com sucesso!");
 
-      setCarregando(false);
       setOpen(false);
       setSenha("");
       setConfirmaSenha("");

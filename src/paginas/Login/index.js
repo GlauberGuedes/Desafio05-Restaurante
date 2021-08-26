@@ -20,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     if (token) {
-      history.push("/produtos");
+      history.push("/pedidos");
     }
   }, []);
 
@@ -50,7 +50,7 @@ export default function Login() {
 
       setToken(dados.token);
 
-      history.push("/produtos");
+      history.push("/pedidos");
     } catch (error) {
       setCarregando(false);
       return setErro(error.message);
@@ -80,6 +80,7 @@ export default function Login() {
         <button className="botao-login" type="submit">
           Entrar
         </button>
+        <p><Link to="/redefinir-senha">Esqueceu a senha?</Link></p>
         <p>
           Ainda não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
         </p>

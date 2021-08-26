@@ -13,7 +13,7 @@ import useAuth from "../../hooks/useAuth";
 import { get, putUsuario } from "../../servicos/requisicaoAPI";
 import logo from "../../assets/LogoRestaurante.png";
 
-export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, setUsuario, restaurante, setRestaurante, dadosUsuario}) {
+export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, restaurante, dadosUsuario}) {
   const classes = useStyles();
   const { token } = useAuth();
   const [open, setOpen] = useState(false);
@@ -116,6 +116,14 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, set
       },
     };
 
+    if (senha) {
+      if (senha !== confirmaSenha) {
+        setCarregando(false);
+        setErro("Senha e Repita a senha devem ser iguais!");
+        return;
+      }
+    }
+
     try {
       const { dados, erro } = await putUsuario(
         'usuarios',
@@ -124,22 +132,14 @@ export default function ModalEditarUsuario({setConfirmacaoCadastro, usuario, set
       );
         
       setCarregando(false);
-      if (senha) {
-        if (senha !== confirmaSenha) {
-          setErro("Senha e Repita a senha devem ser iguais!");
-          return;
-        }
-      }
       
       if (erro) {
-        setCarregando(false);
         return setErro(dados);
       }
       
       await dadosUsuario();
       setConfirmacaoCadastro("Alterações realizadas com sucesso!");
 
-      setCarregando(false);
       setOpen(false);
       setSenha("");
       setConfirmaSenha("");

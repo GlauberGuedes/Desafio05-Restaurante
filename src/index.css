@@ -17,3 +17,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.MuiPaper-rounded {
+  border-radius: 30px !important;
+}

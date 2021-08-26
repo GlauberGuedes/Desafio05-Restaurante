@@ -1,0 +1,91 @@
+.container-recuperar-senha {
+  position: relative;
+  background-image: url("../../assets/bg-login.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 968px;
+  padding: 169px 0 242px 320px;
+}
+
+.ilustracao-recuperar-senha {
+  position: absolute;
+  top: 73px;
+  left: 146px;
+}
+
+.form-recuperar-senha {
+  position: relative;
+  background-color: white;
+  box-shadow: 0px 4px 16px rgba(50, 50, 50, 0.4);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 64px 20px;
+  gap: 24px;
+  max-width: 580px;
+  z-index: 1;
+}
+
+.form-recuperar-senha h1 {
+  color: #d13201;
+  font-size: 32px;
+  line-height: 150%;
+  margin: 0 0 20px 20px;
+  font-family: "Baloo 2", cursive;
+  padding: 0;
+}
+
+.div-input {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+  margin-left: 20px;
+}
+
+.icone {
+  position: absolute;
+  top: 62px;
+  right: 35px;
+  color: #bebebe;
+  cursor: pointer;
+}
+
+.div-input label {
+  color: #393c40;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 20px 0 -20px 16px;
+}
+
+.div-input input {
+  border: 1px solid #bebebe;
+  border-radius: 7px;
+  height: 47px;
+  font-size: 18px;
+  padding: 3px 0 3px 10px;
+  margin: -20px 0 -7px 0;
+}
+
+.form-recuperar-senha button {
+  background: #d13201;
+  border-radius: 20px;
+  width: 126px;
+  height: 40px;
+  align-self: center;
+  border: unset;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  margin-left: 40px;
+  margin: 20px 0 0 0;
+}
+
+.form-recuperar-senha p {
+  font-size: 12px;
+  color: #6f7377;
+  text-align: center;
+  margin: 15px 20px 0 0;
+}

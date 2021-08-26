@@ -198,3 +198,4 @@ export async function postDesativar(endPoint, token) {
     throw error;
   }
 }
+

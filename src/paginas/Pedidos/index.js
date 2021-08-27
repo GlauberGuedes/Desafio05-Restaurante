@@ -48,7 +48,7 @@ export default function Pedidos() {
 
       setCarregando(false);
       if (erro) {
-        return setErro(dados);
+        return;
       }
 
       setRestaurante(dados.restaurante);
@@ -67,7 +67,7 @@ export default function Pedidos() {
 
       setCarregando(false);
       if (erro) {
-        return setErro(dados);
+        return;
       }
 
       setPedidos(dados);

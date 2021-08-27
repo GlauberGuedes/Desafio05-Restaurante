@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:8001/";
+const baseURL = "http://undefinedrestaurante.herokuapp.com/";
 
 export async function post(endPoint, data) {
   const headers = {
